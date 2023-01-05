@@ -22,4 +22,8 @@ TRUNCATE TABLE student;
 INSERT INTO student (github_id, name, semester)
 VALUES ('SeoJeongYeop', '서정엽', 6);
 
+TRUNCATE TABLE github_data;
+INSERT INTO github_data (commit_count, follower_count, following_count, github_id,
+                         issue_count, pr_count, repo_count, star_count, year)
+VALUES (100, 1, 1, 'SeoJeongYeop', 10, 1, 10, 1, 2023);
 SET FOREIGN_KEY_CHECKS=1;
