@@ -1,14 +1,17 @@
 package com.swcoaching.example1.service.posts;
 
+import com.swcoaching.example1.controller.dto.PostsListResponseDto;
 import com.swcoaching.example1.controller.dto.PostsResponseDto;
 import com.swcoaching.example1.controller.dto.PostsSaveRequestDto;
 import com.swcoaching.example1.controller.dto.PostsUpdateRequestDto;
 import com.swcoaching.example1.domain.posts.Posts;
 import com.swcoaching.example1.domain.posts.PostsRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class PostsService {
@@ -35,5 +38,12 @@ public class PostsService {
 
         return new PostsResponseDto(entity);
 
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
