@@ -3,7 +3,7 @@
 !gradle/wrapper/gradle-wrapper.jar
 **/out/
 .DS_Store
-
+application-oauth.yml
 # queryDSL
 **/generated
 
