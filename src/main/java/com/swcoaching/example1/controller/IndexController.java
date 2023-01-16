@@ -18,6 +18,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
+        // postService.findAllDesc()로 가져온 결과를 posts로 index.mustach에 전달
         model.addAttribute("posts", postsService.findAllDesc());
 
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
