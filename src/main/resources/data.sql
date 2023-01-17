@@ -29,6 +29,6 @@ VALUES (100, 1, 1, 'SeoJeongYeop', 10, 1, 10, 1, 2023);
 
 TRUNCATE TABLE posts;
 INSERT INTO posts (title, author, content, created_date, modified_date)
-VALUES ('hello world', 'SeoJeongYeop', 'HELLO WORLD', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000');
+VALUES ('title', 'author', 'content', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000');
 
 SET FOREIGN_KEY_CHECKS=1;

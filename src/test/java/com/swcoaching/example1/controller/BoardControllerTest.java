@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -28,6 +29,7 @@ class BoardControllerTest {
 
     @DisplayName("게시판 정보를 조회 테스트 한다")
     @Test
+    @WithMockUser(roles = "USER")
     void testBoard() throws Exception {
         // given
         long id = 1L;
@@ -47,6 +49,7 @@ class BoardControllerTest {
 
     @DisplayName("BoardDto 리턴을 테스트 한다")
     @Test
+    @WithMockUser(roles = "USER")
     public void return_boardDto() throws Exception{
         long id = 1L;
         String title = "test";
