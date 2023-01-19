@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+    - main
+    - release/*
+  pull_request:
+    branches:
+    - main
+    
+jobs:
+  push-test:
+    name: deploy to staging
+    runs-on: windows-2019
+    steps:
+    - name: Gradle Build Action
+      uses: gradle/gradle-build-action@v2.3.3
+      
+    - name: Gradle Test
+      run: ./gradlew test
