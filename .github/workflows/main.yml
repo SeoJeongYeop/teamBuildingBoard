@@ -14,6 +14,5 @@ jobs:
     steps:
     - name: Gradle Build Action
       uses: gradle/gradle-build-action@v2.3.3
-      
-    - name: Gradle Test
-      run: ./gradlew test
+      with:
+        arguments: test
