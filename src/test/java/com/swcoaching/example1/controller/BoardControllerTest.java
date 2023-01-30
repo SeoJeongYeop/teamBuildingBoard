@@ -50,14 +50,14 @@ class BoardControllerTest {
     @DisplayName("BoardDto 리턴을 테스트 한다")
     @Test
     @WithMockUser(roles = "USER")
-    public void return_boardDto() throws Exception{
+    public void return_boardDto() throws Exception {
         long id = 1L;
         String title = "test";
         String remark = "test1";
         mockMvc.perform(get("/board/dto")
-                .param("id", String.valueOf(id))
-                .param("title", title)
-                .param("remark", remark))
+                        .param("id", String.valueOf(id))
+                        .param("title", title)
+                        .param("remark", remark))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is((int) id)))
                 .andExpect(jsonPath("$.title", is(title)))

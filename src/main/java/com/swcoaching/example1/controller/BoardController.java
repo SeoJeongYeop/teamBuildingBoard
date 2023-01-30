@@ -17,20 +17,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping
 public class BoardController {
-  private final Logger logger = LoggerFactory.getLogger(getClass());
-  private final BoardService boardService;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final BoardService boardService;
 
-  @GetMapping("/board/{boardId}")
-  public Board getBoard(@PathVariable long boardId) {
-    Board board = boardService.findById(boardId);
-    logger.info("Board: {}", board);
-    return board;
-  }
+    @GetMapping("/api/v1/boards/{boardId}")
+    public Board getBoard(@PathVariable long boardId) {
+        Board board = boardService.findById(boardId);
+        logger.info("Board: {}", board);
+        return board;
+    }
 
-  @GetMapping("/board/dto")
-  public BoardResponseDto boardDto(@RequestParam("id") Long id,
-                                   @RequestParam("title") String title,
-                                   @RequestParam("remark") String remark){
-    return new BoardResponseDto(id, title, remark);
-  }
+    // 연습용 코드
+    @GetMapping("/api/v1/boards/dto")
+    public BoardResponseDto boardDto(@RequestParam("id") Long id,
+                                     @RequestParam("title") String title,
+                                     @RequestParam("remark") String remark) {
+        return new BoardResponseDto(id, title, remark);
+    }
+
 }
