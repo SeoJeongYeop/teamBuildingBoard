@@ -2,6 +2,7 @@ package com.swcoaching.example1.domain.posts;
 
 
 import com.swcoaching.example1.domain.BaseTimeEntity;
+import com.swcoaching.example1.domain.board.BoardEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,8 +32,16 @@ public class Posts extends BaseTimeEntity {
         this.author = author;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "boardId")
+    private BoardEntity board;
+
     public void update(String title, String content){
         this.title = title;
         this.content = content;
+    }
+
+    public static Posts of(PostsEntity postEntity) {
+        return new Posts(postEntity.getTitle(), postEntity.getContent(), postEntity.getAuthor());
     }
 }

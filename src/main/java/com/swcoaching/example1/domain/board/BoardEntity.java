@@ -1,5 +1,7 @@
-package com.swcoaching.example1.board.jpa;
+package com.swcoaching.example1.domain.board;
 
+import com.swcoaching.example1.domain.BaseTimeEntity;
+import com.swcoaching.example1.domain.posts.PostsEntity;
 import lombok.Getter;
 
 import jakarta.persistence.Column;
@@ -15,7 +17,7 @@ import java.util.List;
 @Getter
 @Table(name = "board")
 @Entity
-public class BoardEntity {
+public class BoardEntity extends BaseTimeEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -36,6 +38,6 @@ public class BoardEntity {
    * 게시물
    */
   @OneToMany(mappedBy = "board")
-  public List<PostEntity> posts = new ArrayList<>();
+  public List<PostsEntity> posts = new ArrayList<>();
 
 }

@@ -1,6 +1,6 @@
-package com.swcoaching.example1.board;
+package com.swcoaching.example1.domain.board;
 
-import com.swcoaching.example1.board.jpa.BoardEntity;
+import com.swcoaching.example1.domain.posts.Posts;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -16,9 +16,9 @@ public class Board {
 
   private final String remark;
 
-  private final List<Post> posts;
+  private final List<Posts> posts;
 
-  public Board(Long id, String title, String remark, List<Post> posts) {
+  public Board(Long id, String title, String remark, List<Posts> posts) {
     this.id = id;
     this.title = title;
     this.remark = remark;
@@ -26,8 +26,8 @@ public class Board {
   }
 
   public static Board of(BoardEntity boardEntity) {
-    List<Post> posts = boardEntity.getPosts()
-            .stream().map(Post::of).collect(Collectors.toList());
+    List<Posts> posts = boardEntity.getPosts()
+            .stream().map(Posts::of).collect(Collectors.toList());
     return new Board(boardEntity.getId(),
             boardEntity.getTitle(),
             boardEntity.getRemark(),

@@ -1,8 +1,11 @@
 package com.swcoaching.example1.board;
 
-import com.swcoaching.example1.board.jpa.BoardEntity;
-import com.swcoaching.example1.board.jpa.BoardRepository;
-import com.swcoaching.example1.board.jpa.PostEntity;
+import com.swcoaching.example1.domain.board.Board;
+import com.swcoaching.example1.domain.board.BoardEntity;
+import com.swcoaching.example1.domain.board.BoardRepository;
+import com.swcoaching.example1.domain.posts.PostsEntity;
+import com.swcoaching.example1.service.board.BoardService;
+import com.swcoaching.example1.service.board.BoardServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +26,7 @@ class BoardServiceTest {
     void findByIdTest() {
         // given
         BoardEntity boardEntity = mock(BoardEntity.class);
-        PostEntity postEntity = mock(PostEntity.class);
+        PostsEntity postsEntity = mock(PostsEntity.class);
         BoardRepository boardRepository = mock(BoardRepository.class);
         long testBoardId = 1L;
         String testTitle = "게시판 제목 테스트";
@@ -34,8 +37,8 @@ class BoardServiceTest {
         when(boardEntity.getTitle()).thenReturn(testTitle);
         when(boardEntity.getRemark()).thenReturn(testRemark);
 
-        when(postEntity.getContents()).thenReturn(testPostContent);
-        when(boardEntity.getPosts()).thenReturn(List.of(postEntity));
+        when(postsEntity.getContent()).thenReturn(testPostContent);
+        when(boardEntity.getPosts()).thenReturn(List.of(postsEntity));
 
         when(boardRepository.findById(testBoardId)).thenReturn(Optional.of(boardEntity));
 
@@ -49,6 +52,6 @@ class BoardServiceTest {
         assertEquals(board.getRemark(), testRemark);
 
         assertEquals(board.getPosts().size(), 1);
-        assertEquals(board.getPosts().get(0).getContents(), testPostContent);
+        assertEquals(board.getPosts().get(0).getContent(), testPostContent);
     }
 }

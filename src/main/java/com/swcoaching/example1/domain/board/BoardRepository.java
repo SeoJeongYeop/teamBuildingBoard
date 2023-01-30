@@ -1,4 +1,4 @@
-package com.swcoaching.example1.board.jpa;
+package com.swcoaching.example1.domain.board;
 
 import org.springframework.data.repository.CrudRepository;
 

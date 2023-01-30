@@ -1,7 +1,7 @@
 package com.swcoaching.example1.controller;
 
-import com.swcoaching.example1.board.Board;
-import com.swcoaching.example1.board.BoardService;
+import com.swcoaching.example1.domain.board.Board;
+import com.swcoaching.example1.service.board.BoardService;
 import com.swcoaching.example1.controller.dto.BoardResponseDto;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

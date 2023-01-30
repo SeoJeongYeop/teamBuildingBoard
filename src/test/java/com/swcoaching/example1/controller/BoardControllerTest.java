@@ -1,7 +1,7 @@
 package com.swcoaching.example1.controller;
 
-import com.swcoaching.example1.board.Board;
-import com.swcoaching.example1.board.BoardService;
+import com.swcoaching.example1.domain.board.Board;
+import com.swcoaching.example1.service.board.BoardService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
