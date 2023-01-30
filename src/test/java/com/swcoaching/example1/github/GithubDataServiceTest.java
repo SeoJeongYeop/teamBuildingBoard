@@ -1,7 +1,10 @@
 package com.swcoaching.example1.github;
 
-import com.swcoaching.example1.github.jpa.GithubDataEntity;
-import com.swcoaching.example1.github.jpa.GithubDataRepository;
+import com.swcoaching.example1.domain.github.GithubData;
+import com.swcoaching.example1.domain.github.GithubDataEntity;
+import com.swcoaching.example1.domain.github.GithubDataRepository;
+import com.swcoaching.example1.service.github.GithubDataService;
+import com.swcoaching.example1.service.github.GithubDataServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

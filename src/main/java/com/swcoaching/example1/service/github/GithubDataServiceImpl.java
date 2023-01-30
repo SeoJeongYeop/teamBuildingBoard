@@ -1,7 +1,8 @@
-package com.swcoaching.example1.github;
+package com.swcoaching.example1.service.github;
 
-import com.swcoaching.example1.github.jpa.GithubDataEntity;
-import com.swcoaching.example1.github.jpa.GithubDataRepository;
+import com.swcoaching.example1.domain.github.GithubData;
+import com.swcoaching.example1.domain.github.GithubDataEntity;
+import com.swcoaching.example1.domain.github.GithubDataRepository;
 import org.springframework.stereotype.Service;
 
 @Service

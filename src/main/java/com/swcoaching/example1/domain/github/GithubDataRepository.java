@@ -1,4 +1,4 @@
-package com.swcoaching.example1.github.jpa;
+package com.swcoaching.example1.domain.github;
 
 import org.springframework.data.repository.CrudRepository;
 
