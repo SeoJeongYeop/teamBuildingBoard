@@ -7,10 +7,10 @@ VALUES
 SET FOREIGN_KEY_CHECKS=0;
 
 TRUNCATE TABLE board;
-INSERT INTO board(id, title, remark)
+INSERT INTO board(id, title, remark, created_date, modified_date)
 VALUES
-    (1,'자유게시판','이 게시판은 자유게시판입니다. 매너와 규칙 지켜주세요'),
-    (2,'질문과 답변','이곳은 질문과 답변 게시판입니다. 매너와 규칙을 지켜주세요');
+    (1,'자유게시판','이 게시판은 자유게시판입니다. 매너와 규칙 지켜주세요', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000'),
+    (2,'질문과 답변','이곳은 질문과 답변 게시판입니다. 매너와 규칙을 지켜주세요', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000');
 
 TRUNCATE TABLE student;
 INSERT INTO student (github_id, name, semester)
