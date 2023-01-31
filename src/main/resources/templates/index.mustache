@@ -1,40 +1,35 @@
 {{>layout/header}}
-<h1>스프링 부트 팀 빌딩 게시판</h1>
 <div class="col-md-12">
-    <!-- 로그인 기능 영역-->
-    <div class="row">
-        <div class="col-md-6">
-            <a href="/posts/save" class="btn btn-primary">글 등록</a>
-            {{#userName}}
-            Logged in as: <span id="user">{{userName}}</span>
-            <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-            {{/userName}}
-            {{^userName}}
-            <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
-            {{/userName}}
-        </div>
+    <!-- 헤더 영역-->
+    <div id="board-title-bar" class="d-flex justify-content-between shadow-box">
+        <span class="fs-5">메인 페이지</span>
+        <a href="/posts/save" class="btn btn-primary" role="button">글 등록</a>
     </div>
     <br>
     <!--목록 출력 영역-->
-    <table class="table table-horizontal table-bordered">
-        <thead class="thead-strong">
-        <tr>
-            <th>게시글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>최종수정일</th>
-        </tr>
-        </thead>
-        <tbody id="tbody">
-        {{#posts}}
+    <div class="shadow-box">
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
             <tr>
-                <td>{{id}}</td>
-                <td><a href="/posts/update/{{id}}">{{title}}</a></td>
-                <td>{{author}}</td>
-                <td>{{modifiedDate}}</td>
+                <th>게시글번호</th>
+                <th>게시판</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>수정일</th>
             </tr>
-        {{/posts}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="tbody">
+            {{#posts}}
+                <tr>
+                    <td>{{id}}</td>
+                    {{#board}}<td>{{board.title}}</td>{{/board}}
+                    <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                    <td>{{author}}</td>
+                    <td>{{modifiedDate}}</td>
+                </tr>
+            {{/posts}}
+            </tbody>
+        </table>
+    </div>
 </div>
 {{>layout/footer}}

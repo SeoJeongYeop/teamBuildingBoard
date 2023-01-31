@@ -1,0 +1,17 @@
+:root{
+    --main-white: #FFFFFF;
+    --main-black: #000000;
+    --main-bg-color: #EBEBEB;
+    --sub-bg-color: #DAE2E8;
+    --main-border-color: #9D9D9D;
+    --main-point-color: #002743;
+    --sub-point-color: #0094FF;
+    --text-weak-color: #747474;
+    --main-box-shadow:#00000040;
+    --main-inactive:#DDDDDD;
+    --bootstrap-primary:#0D6EFD;
+    --bootstrap-active-primary:#0A53BE;
+    --color-bronze: #DB944B;
+    --color-silver: #D9D9D9;
+    --color-gold: #F9D978;
+}
