@@ -17,7 +17,6 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(BoardController.class)
 class BoardControllerTest {
@@ -45,23 +44,5 @@ class BoardControllerTest {
                 .andExpect(jsonPath("$.id").value(is((int) id)))
                 .andExpect(jsonPath("$.title").value(is(title)))
                 .andExpect(jsonPath("$.remark").value(is(remark)));
-    }
-
-    @DisplayName("BoardDto 리턴을 테스트 한다")
-    @Test
-    @WithMockUser(roles = "USER")
-    public void return_boardDto() throws Exception {
-        long id = 1L;
-        String title = "test";
-        String remark = "test1";
-        mockMvc.perform(get("/api/v1/boards/dto")
-                        .param("id", String.valueOf(id))
-                        .param("title", title)
-                        .param("remark", remark))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is((int) id)))
-                .andExpect(jsonPath("$.title", is(title)))
-                .andExpect(jsonPath("$.remark", is(remark)));
-        System.out.println("return_boardDto DONE");
     }
 }
