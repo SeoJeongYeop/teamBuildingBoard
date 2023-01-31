@@ -22,4 +22,5 @@ application-oauth.yml
 *.iml
 *.ipr
 /out/
+/bin/
 Local*Test.java

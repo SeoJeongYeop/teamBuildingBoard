@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/","/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
-                        .requestMatchers("/api/v1/**").hasRole(Role.USER.name())
+                        .requestMatchers("/api/v1/**").permitAll()//hasRole(Role.USER.name()) // 개발 중 설정
                         .anyRequest().authenticated())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/"))

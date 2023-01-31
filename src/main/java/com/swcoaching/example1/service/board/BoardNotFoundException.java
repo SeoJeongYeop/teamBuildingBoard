@@ -1,4 +1,4 @@
-package com.swcoaching.example1.board;
+package com.swcoaching.example1.service.board;
 
 public class BoardNotFoundException extends RuntimeException{
   public BoardNotFoundException(long id) {

@@ -1,5 +1,4 @@
-package com.swcoaching.example1.github;
-import com.swcoaching.example1.github.jpa.GithubDataEntity;
+package com.swcoaching.example1.domain.github;
 
 import lombok.Builder;
 

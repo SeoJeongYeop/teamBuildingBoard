@@ -3,19 +3,19 @@ package com.swcoaching.example1.controller;
 import com.swcoaching.example1.config.auth.LoginUser;
 import com.swcoaching.example1.config.auth.dto.SessionUser;
 import com.swcoaching.example1.controller.dto.PostsResponseDto;
+import com.swcoaching.example1.service.board.BoardService;
 import com.swcoaching.example1.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import jakarta.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
     private final PostsService postsService;
-    private final HttpSession httpSession;
+    private final BoardService boardService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -30,6 +30,17 @@ public class IndexController {
             model.addAttribute("userName", user.getName());
         }
         return "index";
+    }
+
+    @GetMapping("/community")
+    public String community(Model model, @LoginUser SessionUser user) {
+
+        model.addAttribute("boards", boardService.findAll());
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "board";
     }
 
     @GetMapping("/posts/save")

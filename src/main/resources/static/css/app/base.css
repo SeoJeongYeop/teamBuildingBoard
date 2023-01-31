@@ -1,0 +1,116 @@
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: 'IBMPlexSansKR-Regular', sans-serif;
+    font-weight: 500;
+    background-color: var(--main-white);
+    -ms-overflow-style: none;
+}
+#body-wrapper {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 80px;
+}
+header {
+    background-color: var(--sub-bg-color);
+}
+footer {
+    width: 100%;
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+    border-top: solid 2px black;
+    text-align: center;
+}
+
+/* body 스크롤바 제거 */
+body::-webkit-scrollbar {
+    display: none;
+}
+/* div 내부 스크롤바 스타일 */
+div> ::-webkit-scrollbar {
+    width: 0.25rem;
+    height: 0.25rem;
+}
+div> ::-webkit-scrollbar-track {
+    background: var(--main-border-color);
+    border-radius: 0.625rem;
+}
+div> ::-webkit-scrollbar-thumb {
+    background: var(--main-inactive);
+    border-radius: 0.625rem;
+}
+div> ::-webkit-scrollbar-thumb:hover {
+    background: var(--main-inactive);
+}
+
+li, a, button {
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.row {
+    --bs-gutter-x: 0.8rem !important;
+}
+
+.none {
+    display: none !important;
+}
+
+/* cursor */
+.default-cursor {
+    cursor: default;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.hover-opacity{
+    cursor: pointer;
+}
+
+.hover-opacity:hover{
+    opacity: 0.5;
+}
+
+/* font */
+.fs-7 {
+    font-size: 14px;
+}
+.fs-8 {
+    font-size: 12px;
+}
+.text-weak{
+    color: var(--text-weak-color);
+    font-size: 12px;
+}
+.text-white {
+    color: var(--main-white);
+}
+.bold {
+    font-weight: bold;
+    color: var(--main-black);
+}
+
+#board-title-bar {
+    background: var(--main-point-color) !important;
+    color: var(--main-white);
+}
+.shadow-box {
+    padding: 0.55rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+}

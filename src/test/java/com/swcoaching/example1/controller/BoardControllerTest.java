@@ -1,7 +1,7 @@
 package com.swcoaching.example1.controller;
 
-import com.swcoaching.example1.board.Board;
-import com.swcoaching.example1.board.BoardService;
+import com.swcoaching.example1.domain.board.Board;
+import com.swcoaching.example1.service.board.BoardService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ class BoardControllerTest {
         when(boardService.findById(id)).thenReturn(new Board(id, title, remark, emptyList()));
 
         // when
-        ResultActions resultActions = mockMvc.perform(get("/board/{boardId}", id)).andDo(print());
+        ResultActions resultActions = mockMvc.perform(get("/api/v1/boards/{boardId}", id)).andDo(print());
 
         // then
         resultActions
@@ -50,14 +50,14 @@ class BoardControllerTest {
     @DisplayName("BoardDto 리턴을 테스트 한다")
     @Test
     @WithMockUser(roles = "USER")
-    public void return_boardDto() throws Exception{
+    public void return_boardDto() throws Exception {
         long id = 1L;
         String title = "test";
         String remark = "test1";
-        mockMvc.perform(get("/board/dto")
-                .param("id", String.valueOf(id))
-                .param("title", title)
-                .param("remark", remark))
+        mockMvc.perform(get("/api/v1/boards/dto")
+                        .param("id", String.valueOf(id))
+                        .param("title", title)
+                        .param("remark", remark))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is((int) id)))
                 .andExpect(jsonPath("$.title", is(title)))
