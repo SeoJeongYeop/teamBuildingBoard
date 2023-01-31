@@ -16,6 +16,10 @@ TRUNCATE TABLE student;
 INSERT INTO student (github_id, name, semester)
 VALUES ('SeoJeongYeop', '서정엽', 6);
 
+TRUNCATE TABLE team;
+INSERT INTO team (id, name, description, picture)
+VALUES (1, 'name', 'description', '/static/test.png');
+
 TRUNCATE TABLE github_data;
 INSERT INTO github_data (commit_count, follower_count, following_count, github_id,
                          issue_count, pr_count, repo_count, star_count, year)

@@ -38,7 +38,7 @@ class BoardControllerTest {
         when(boardService.findById(id)).thenReturn(new Board(id, title, remark, emptyList()));
 
         // when
-        ResultActions resultActions = mockMvc.perform(get("/board/{boardId}", id)).andDo(print());
+        ResultActions resultActions = mockMvc.perform(get("/api/v1/boards/{boardId}", id)).andDo(print());
 
         // then
         resultActions
@@ -54,7 +54,7 @@ class BoardControllerTest {
         long id = 1L;
         String title = "test";
         String remark = "test1";
-        mockMvc.perform(get("/board/dto")
+        mockMvc.perform(get("/api/v1/boards/dto")
                         .param("id", String.valueOf(id))
                         .param("title", title)
                         .param("remark", remark))
