@@ -44,7 +44,12 @@ public class IndexController {
     }
 
     @GetMapping("/posts/save")
-    public String postsSave() {
+    public String postsSave(Model model, @LoginUser SessionUser user) {
+        model.addAttribute("boards", boardService.findAll());
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
         return "posts-save";
     }
 

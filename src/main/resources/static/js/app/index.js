@@ -1,30 +1,31 @@
-var main = {
-    init : function (){
-        var _this = this;
-        $('#btn-save').on('click', ()=>{
+const main = {
+    init: function () {
+        let _this = this;
+        $('#btn-save').on('click', () => {
             _this.save();
         });
-        $('#btn-update').on('click', ()=>{
+        $('#btn-update').on('click', () => {
             _this.update();
         });
-        $('#btn-delete').on('click', ()=>{
+        $('#btn-delete').on('click', () => {
             _this.delete();
         });
     },
-    save : function () {
-        var data = {
+    save: function () {
+        let data = {
             title: $('#title').val(),
             author: $('#author').val(),
-            content: $('#content').val()
+            content: $('#content').val(),
+            boardId: parseInt($('#selectBoard').val()),
         };
 
         $.ajax({
-            type:'POST',
+            type: 'POST',
             url: '/api/v1/posts',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
-        }).done(function() {
+        }).done(function () {
             alert('글이 등록되었습니다.');
             window.location.href = '/';
         }).fail(function (error) {
@@ -32,11 +33,11 @@ var main = {
         });
     },
     update: function () {
-        var data = {
+        let data = {
             title: $('#title').val(),
             content: $("#content").val()
         };
-        var id = $('#id').val();
+        let id = $('#id').val();
 
         $.ajax({
             type: 'PUT',
@@ -52,7 +53,7 @@ var main = {
         });
     },
     delete: function () {
-        var id = $('#id').val();
+        let id = $('#id').val();
 
         $.ajax({
             type: 'DELETE',
@@ -69,3 +70,10 @@ var main = {
 };
 
 main.init();
+$().ready(function () {
+    new SlimSelect({
+        select: '#selectBoard',
+        showSearch: false,
+        placeholderText: '게시판',
+    });
+});
