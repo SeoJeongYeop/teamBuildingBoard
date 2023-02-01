@@ -1,35 +1,38 @@
 {{>layout/header}}
-<div class="col-md-12">
-    <!-- 헤더 영역-->
-    <div id="board-title-bar" class="d-flex justify-content-between shadow-box">
-        <span class="fs-5">메인 페이지</span>
-        <a href="/posts/save" class="btn btn-primary" role="button">글 등록</a>
-    </div>
-    <br>
-    <!--목록 출력 영역-->
-    <div class="shadow-box">
-        <table class="table table-horizontal table-bordered">
-            <thead class="thead-strong">
-            <tr>
-                <th>게시글번호</th>
-                <th>게시판</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>수정일</th>
-            </tr>
-            </thead>
-            <tbody id="tbody">
-            {{#posts}}
+<div id="main-container" class="row">
+    {{>layout/sidebar}}
+    <div id="main-content" class="col-md-9">
+        <!-- 헤더 영역-->
+        <div id="board-title-bar" class="d-flex justify-content-between shadow-box">
+            <span class="fs-5">메인 페이지</span>
+            <a href="/posts/save" class="btn btn-primary" role="button">글 등록</a>
+        </div>
+        <br>
+        <!--목록 출력 영역-->
+        <div class="shadow-box">
+            <table class="table table-horizontal table-bordered">
+                <thead class="thead-strong">
                 <tr>
-                    <td>{{id}}</td>
-                    {{#board}}<td>{{board.title}}</td>{{/board}}
-                    <td><a href="/posts/update/{{id}}">{{title}}</a></td>
-                    <td>{{author}}</td>
-                    <td>{{modifiedDate}}</td>
+                    <th>게시글번호</th>
+                    <th>게시판</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>수정일</th>
                 </tr>
-            {{/posts}}
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="tbody">
+                {{#posts}}
+                    <tr>
+                        <td>{{id}}</td>
+                        {{#board}}<td>{{board.title}}</td>{{/board}}
+                        <td><a href="/community/posts/{{id}}">{{title}}</a></td>
+                        <td>{{author}}</td>
+                        <td>{{modifiedDate}}</td>
+                    </tr>
+                {{/posts}}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 {{>layout/footer}}

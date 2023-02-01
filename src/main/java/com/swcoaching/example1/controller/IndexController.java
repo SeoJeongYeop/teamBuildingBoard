@@ -20,6 +20,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
         // postService.findAllDesc()로 가져온 결과를 posts로 index.mustach에 전달
+        model.addAttribute("boards", boardService.findAll());
         model.addAttribute("posts", postsService.findAllDesc());
 
         //index 메소드 외에 다른 컨트롤러와 메소드에서 세션값이 필요하면 그때마다 직접 세션에서 값을 가져와야한다.
@@ -28,6 +29,7 @@ public class IndexController {
 
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            model.addAttribute("userPicture", user.getPicture());
         }
         return "index";
     }
@@ -38,6 +40,7 @@ public class IndexController {
         model.addAttribute("boards", boardService.findAll());
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            model.addAttribute("userPicture", user.getPicture());
         }
 
         return "board";
