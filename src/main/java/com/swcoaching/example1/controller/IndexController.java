@@ -46,6 +46,19 @@ public class IndexController {
         return "board";
     }
 
+    @GetMapping("/community/posts/{id}")
+    public String postsSave(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+        model.addAttribute("boards", boardService.findAll());
+        PostsResponseDto dto = postsService.findById(id);
+        model.addAttribute("post", dto);
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userPicture", user.getPicture());
+        }
+
+        return "post";
+    }
+
     @GetMapping("/posts/save")
     public String postsSave(Model model, @LoginUser SessionUser user) {
         model.addAttribute("boards", boardService.findAll());

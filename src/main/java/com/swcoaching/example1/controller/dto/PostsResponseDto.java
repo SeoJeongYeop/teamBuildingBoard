@@ -4,6 +4,8 @@ import com.swcoaching.example1.domain.board.BoardEntity;
 import com.swcoaching.example1.domain.posts.PostsEntity;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class PostsResponseDto {
 
@@ -12,6 +14,8 @@ public class PostsResponseDto {
     private final String content;
     private final String author;
     private final BoardEntity board;
+    private final LocalDateTime createdDate;
+    private final LocalDateTime modifiedDate;
 
     public PostsResponseDto(PostsEntity entity) {
         this.id = entity.getId();
@@ -19,5 +23,7 @@ public class PostsResponseDto {
         this.content = entity.getContent();
         this.author = entity.getAuthor();
         this.board = entity.getBoard();
+        this.createdDate = entity.getCreatedDate();
+        this.modifiedDate = entity.getModifiedDate();
     }
 }
