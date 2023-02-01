@@ -1,0 +1,47 @@
+{{>layout/header}}
+<div id="main-container" class="row">
+    {{>layout/sidebar}}
+    <div id="main-content" class="col-md-9">
+        <div id="board-title-bar" class="d-flex justify-content-center">
+            <div id="board-title">
+            {{#post}}
+                {{#board}}
+                <a href="/community/board/{{id}}">
+                    {{title}}
+                </a>
+                {{/board}}
+                {{^board}}
+                    <a href="#">이름모를 게시판</a>
+                {{/board}}
+            {{/post}}
+            </div>
+        </div>
+        <div id="article-content">
+            <div id="article-wrapper">
+                <div class="d-flex flex-row justify-content-between">
+                    <div id="article-title">
+                        {{post.title}}
+                    </div>
+                    <div id="article-metadata">
+                        <div id="article-datetime">
+                            <div>
+                                {{post.createdDate}}
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                            <a href="/posts/update/{{post.id}}">수정</a>
+                            <a href="/posts/delete/{{post.id}}">삭제</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="gray-border"></div>
+                <div>
+                    <div id="article-body">
+                        {{ post.content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{>layout/footer}}

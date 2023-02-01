@@ -4,12 +4,24 @@
     <div class="col-md-4">
         <form>
             <div class="form-group">
+                <label for="selectBoard">게시판</label>
+                <select name="board" id="selectBoard" required>
+                    <option data-placeholder="true"></option>
+                    {{#boards}}<option value="{{id}}">{{title}}</option>{{/boards}}
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" id="title" class="form-control" placeholder="제목을 입력하세요">
             </div>
             <div class="form-group">
                 <label for="author">작성자</label>
-                <input type="text" id="author" class="form-control" placeholder="작성자를 입력하세요">
+                {{#userName}}
+                    <input type="text" id="author" class="form-control" value="{{userName}}" readonly>
+                {{/userName}}
+                {{^userName}}
+                    <input type="text" id="author" class="form-control" placeholder="작성자를 입력하세요" required>
+                {{/userName}}
             </div>
             <div class="form-group">
                 <label for="content">내용</label>

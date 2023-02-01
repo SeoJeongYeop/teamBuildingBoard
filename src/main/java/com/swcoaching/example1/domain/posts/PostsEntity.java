@@ -3,9 +3,12 @@ package com.swcoaching.example1.domain.posts;
 import com.swcoaching.example1.domain.BaseTimeEntity;
 import com.swcoaching.example1.domain.board.BoardEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 @Table(name = "post")
 @Entity
 public class PostsEntity extends BaseTimeEntity {
@@ -19,9 +22,26 @@ public class PostsEntity extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Column(length = 50, nullable = false)
     private String author;
 
     @ManyToOne
     @JoinColumn(name = "boardId")
     private BoardEntity board;
+
+    @Builder
+    public PostsEntity(String title, String content, String author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public void setBoard(BoardEntity boardEntity) {
+        this.board = boardEntity;
+    }
 }

@@ -1,11 +1,10 @@
 package com.swcoaching.example1.domain.board;
 
-import com.swcoaching.example1.domain.posts.Posts;
+import com.swcoaching.example1.domain.posts.PostsEntity;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ToString
 @Getter
@@ -16,18 +15,17 @@ public class Board {
 
     private final String remark;
 
-    private final List<Posts> posts;
+    private final List<PostsEntity> posts;
 
-    public Board(Long id, String title, String remark, List<Posts> posts) {
+    public Board(Long id, String title, String remark, List<PostsEntity> postsEntities) {
         this.id = id;
         this.title = title;
         this.remark = remark;
-        this.posts = posts;
+        this.posts = postsEntities;
     }
 
     public static Board of(BoardEntity boardEntity) {
-        List<Posts> posts = boardEntity.getPosts()
-                .stream().map(Posts::of).collect(Collectors.toList());
+        List<PostsEntity> posts = boardEntity.getPosts();
         return new Board(boardEntity.getId(),
                 boardEntity.getTitle(),
                 boardEntity.getRemark(),

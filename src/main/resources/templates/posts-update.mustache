@@ -3,9 +3,12 @@
 <div class="col-md-12">
     <div class="col-md-4">
         <form>
+            <input type="hidden" id="id" class="form-control" value="{{post.id}}" readonly>
             <div class="form-group">
-                <label for="id">글 번호</label>
-                <input type="text" id="id" class="form-control" value="{{post.id}}" readonly>
+                <label for="selectBoard">게시판</label>
+                <select name="board" id="selectBoard" data-target="{{post.board.id}}" required>
+                    {{#boards}}<option value="{{id}}">{{title}}</option>{{/boards}}
+                </select>
             </div>
             <div class="form-group">
                 <label for="title">제목</label>
