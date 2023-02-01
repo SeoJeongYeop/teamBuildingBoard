@@ -1,7 +1,7 @@
 package com.swcoaching.example1.controller.dto;
 
 import com.swcoaching.example1.domain.board.BoardEntity;
-import com.swcoaching.example1.domain.posts.Posts;
+import com.swcoaching.example1.domain.posts.PostsEntity;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -16,7 +16,7 @@ public class PostsListResponseDto {
     private final BoardEntity board;
 
 
-    public PostsListResponseDto(Posts entity) {
+    public PostsListResponseDto(PostsEntity entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.author = entity.getAuthor();

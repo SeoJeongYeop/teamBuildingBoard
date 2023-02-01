@@ -1,6 +1,6 @@
 package com.swcoaching.example1.controller.dto;
 
-import com.swcoaching.example1.domain.posts.Posts;
+import com.swcoaching.example1.domain.posts.PostsEntity;
 import lombok.Getter;
 
 @Getter
@@ -11,7 +11,7 @@ public class PostsResponseDto {
     private final String content;
     private final String author;
 
-    public PostsResponseDto(Posts entity) {
+    public PostsResponseDto(PostsEntity entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.content = entity.getContent();
