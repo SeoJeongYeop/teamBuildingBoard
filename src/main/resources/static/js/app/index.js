@@ -35,7 +35,8 @@ const main = {
     update: function () {
         let data = {
             title: $('#title').val(),
-            content: $("#content").val()
+            content: $("#content").val(),
+            boardId: parseInt($('#selectBoard').val()),
         };
         let id = $('#id').val();
 
@@ -71,9 +72,13 @@ const main = {
 
 main.init();
 $().ready(function () {
+    let target = $("#selectBoard").data("target");
+    $(`option[value='${target}']`).attr("selected","selected");
     new SlimSelect({
         select: '#selectBoard',
-        showSearch: false,
-        placeholderText: '게시판',
+        settings:{
+            showSearch: false,
+            placeholderText: '게시판',
+        }
     });
 });

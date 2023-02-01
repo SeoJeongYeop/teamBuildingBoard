@@ -2,6 +2,7 @@ package com.swcoaching.example1.domain.board;
 
 import com.swcoaching.example1.domain.BaseTimeEntity;
 import com.swcoaching.example1.domain.posts.PostsEntity;
+import lombok.Builder;
 import lombok.Getter;
 
 import jakarta.persistence.Column;
@@ -11,11 +12,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 @Table(name = "board")
 @Entity
 public class BoardEntity extends BaseTimeEntity {
@@ -41,4 +44,12 @@ public class BoardEntity extends BaseTimeEntity {
     @OneToMany(mappedBy = "board")
     public List<PostsEntity> posts = new ArrayList<>();
 
+    @Builder
+    public BoardEntity(String title, String remark) {
+        this.title = title;
+        this.remark = remark;
+    }
+    public void addPosts(PostsEntity posts) {
+        this.posts.add(posts);
+    }
 }

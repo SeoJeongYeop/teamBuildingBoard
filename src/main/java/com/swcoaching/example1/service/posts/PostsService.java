@@ -35,6 +35,8 @@ public class PostsService {
                 .orElseThrow(() -> new PostNotFoundException(id));
 
         posts.update(requestDto.getTitle(), requestDto.getContent());
+        BoardEntity boardEntity = boardRepository.getReferenceById(requestDto.getBoardId());
+        posts.setBoard(boardEntity);
 
         return id;
     }
