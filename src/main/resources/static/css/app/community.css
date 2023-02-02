@@ -162,8 +162,9 @@
 }
 
 #board-title {
-    font-size: 18px;
-    margin: auto;
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 6px;
 }
 
 @media (max-width: 992px) {

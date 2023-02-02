@@ -8,6 +8,8 @@ import com.swcoaching.example1.domain.board.BoardEntity;
 import com.swcoaching.example1.domain.board.BoardRepository;
 import com.swcoaching.example1.domain.posts.PostsEntity;
 import com.swcoaching.example1.domain.posts.PostsRepository;
+import com.swcoaching.example1.domain.user.User;
+import com.swcoaching.example1.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
@@ -20,12 +22,20 @@ import java.util.stream.Collectors;
 public class PostsService {
     private final PostsRepository postsRepository;
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
         PostsEntity postsEntity = requestDto.toEntity();
         BoardEntity boardEntity = boardRepository.getReferenceById(requestDto.getBoardId());
         postsEntity.setBoard(boardEntity);
+        System.out.println(requestDto.getUserId());
+        User user = userRepository.getReferenceById(requestDto.getUserId());
+        postsEntity.setUser(user);
+
+        System.out.println("PostService postsEntity user email");
+        System.out.println(postsEntity.getUser().getEmail());
+
         return postsRepository.save(postsEntity).getId();
     }
 
@@ -62,5 +72,13 @@ public class PostsService {
         return postsRepository.findAllDesc().stream()
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findByBoardId(Long boardId) {
+        return postsRepository.findByBoardId(boardId).stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+
     }
 }

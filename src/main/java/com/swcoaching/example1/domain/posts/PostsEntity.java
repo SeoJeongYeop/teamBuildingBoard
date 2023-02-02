@@ -2,6 +2,7 @@ package com.swcoaching.example1.domain.posts;
 
 import com.swcoaching.example1.domain.BaseTimeEntity;
 import com.swcoaching.example1.domain.board.BoardEntity;
+import com.swcoaching.example1.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +27,10 @@ public class PostsEntity extends BaseTimeEntity {
     private String author;
 
     @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne
     @JoinColumn(name = "boardId")
     private BoardEntity board;
 
@@ -43,5 +48,9 @@ public class PostsEntity extends BaseTimeEntity {
 
     public void setBoard(BoardEntity boardEntity) {
         this.board = boardEntity;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

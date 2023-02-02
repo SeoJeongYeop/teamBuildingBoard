@@ -2,26 +2,18 @@
 <div id="main-container" class="row">
     {{>layout/sidebar}}
     <div id="main-content" class="col-md-9">
+        {{!헤더 영역}}
         <div id="board-title-bar" class="d-flex justify-content-between">
-            <div id="board-title">
-            {{#post}}
-                {{#board}}
-                <a href="/community/boards/{{id}}">
-                    {{title}}
-                </a>
-                {{/board}}
-                {{^board}}
-                    <a href="#">이름모를 게시판</a>
-                {{/board}}
-            {{/post}}
-            </div>
+            <span id="board-title">{{title}}</span>
+            <a href="{{requestLink}}" class="btn btn-primary" role="button">{{requestText}}</a>
         </div>
+        {{!컨텐츠 영역}}
         <div id="article-content">
             <div id="article-wrapper">
-                {{#post}}
+                {{#team}}
                 <div class="d-flex flex-row justify-content-between">
                     <div id="article-title">
-                        {{title}}
+                        {{name}}
                     </div>
                     <div id="article-metadata">
                         <div id="article-datetime">
@@ -29,22 +21,22 @@
                                 {{createdDate}}
                             </div>
                         </div>
-                        {{#isAuthor}}
+                        {{#isOwner}}
                         <div class="d-flex flex-column justify-content-center">
-                            <a href="/posts/update/{{id}}">수정</a>
-                            <a href="/posts/delete/{{id}}">삭제</a>
+                            <a href="/team/update/{{name}}">수정</a>
+                            <a href="/team/delete/{{name}}">삭제</a>
                         </div>
-                        {{/isAuthor}}
+                        {{/isOwner}}
                     </div>
                 </div>
                 <div class="gray-border"></div>
                 <div>
                     <div id="article-body">
-                        {{content}}
+                        {{description}}
                     </div>
                 </div>
-                {{/post}}
-                {{^post}}<div>게시글이 없습니다.</div>{{/post}}
+                {{/team}}
+                {{^team}}<div>팀이 없습니다.</div>{{/team}}
             </div>
         </div>
     </div>

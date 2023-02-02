@@ -1,6 +1,7 @@
 package com.swcoaching.example1.controller;
 
 import com.swcoaching.example1.controller.dto.TeamResponseDto;
+import com.swcoaching.example1.domain.Status;
 import com.swcoaching.example1.domain.team.Team;
 import com.swcoaching.example1.service.team.TeamService;
 import org.junit.jupiter.api.DisplayName;
@@ -36,11 +37,13 @@ public class TeamControllerTest {
         String name = "name";
         String description = "description";
         String picture = "/static/test.png";
+        Status status = Status.NORMAL;
         when(teamService.findById(id))
                 .thenReturn(new TeamResponseDto(Team.builder()
                         .name(name)
                         .description(description)
                         .picture(picture)
+                        .status(status)
                         .build()));
 
         //when
@@ -51,6 +54,7 @@ public class TeamControllerTest {
         resultActions
                 .andExpect(jsonPath("$.name").value(is(name)))
                 .andExpect(jsonPath("$.description").value(is(description)))
-                .andExpect(jsonPath("$.picture").value(is(picture)));
+                .andExpect(jsonPath("$.picture").value(is(picture)))
+                .andExpect(jsonPath("$.status").value(is(status.name())));
     }
 }
