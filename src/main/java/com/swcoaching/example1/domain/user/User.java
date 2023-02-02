@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
-@Table(name = "user_entity")
+@Table(name = "app_user")
 @Entity
 public class User extends BaseTimeEntity {
 
