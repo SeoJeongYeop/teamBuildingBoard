@@ -3,6 +3,7 @@ package com.swcoaching.example1.controller.web;
 import com.swcoaching.example1.config.auth.LoginUser;
 import com.swcoaching.example1.config.auth.dto.SessionUser;
 import com.swcoaching.example1.controller.dto.PostsResponseDto;
+import com.swcoaching.example1.domain.board.Board;
 import com.swcoaching.example1.service.board.BoardService;
 import com.swcoaching.example1.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,9 @@ public class IndexController {
             model.addAttribute("userName", user.getName());
             model.addAttribute("userPicture", user.getPicture());
         }
+        model.addAttribute("Title", "메인 페이지");
+        model.addAttribute("TitleLink", "/");
+
         return "index";
     }
 
@@ -44,6 +48,23 @@ public class IndexController {
         }
 
         return "board";
+    }
+
+    @GetMapping("/community/boards/{boardId}")
+    public String community(@PathVariable Long boardId, Model model, @LoginUser SessionUser user) {
+
+        model.addAttribute("boards", boardService.findAll());
+        Board dto = boardService.findById(boardId);
+        model.addAttribute("posts", postsService.findByBoardId(boardId));
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userPicture", user.getPicture());
+        }
+        model.addAttribute("Title", dto.getTitle());
+        model.addAttribute("TitleLink", "/community/boards/" + dto.getId());
+
+        return "index";
     }
 
     @GetMapping("/community/posts/{id}")

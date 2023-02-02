@@ -18,18 +18,20 @@
         {{/userPicture}}
     </div>
     <div id="community-tab" class="w-100">
-        <!-- 내 활동 -->
+        {{#userName}}
+        {{!내 활동}}
         <div class="boardgroup-title">
             <span>내 활동</span>
             <i class="bi bi-chevron-up folder hover-opacity" data-fold-target=".link-activity"></i>
         </div>
         <div class="boardgroup-item link-activity hover-opacity">
-            <a href="/community/activity/" class="sidebar-link">
+            <a href="/community/activity" class="sidebar-link">
                 <i class="bi bi-file-text-fill fa-lg"></i>
                 <span>내 활동 목록</span>
             </a>
         </div>
-        <!-- 일반 게시판 -->
+        {{/userName}}
+        {{!일반 게시판}}
         <div id="normal-boardgroup" class="boardgroup-title">
             <a href="/community/">
                 게시판
@@ -38,8 +40,8 @@
         </div>
         {{#boards}}
         <div class="boardgroup-item link-board hover-opacity">
-            <a href="/community/boards/{{id}}">
-                <i class="bi {icons[board.board_type]} fa-lg"></i>
+            <a href="/community/boards/{{id}}" class="sidebar-link">
+                <i class="bi bi-file-text-fill fa-lg"></i>
                 <span>{{title}}</span>
             </a>
         </div>

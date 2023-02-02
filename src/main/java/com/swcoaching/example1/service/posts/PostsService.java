@@ -73,4 +73,12 @@ public class PostsService {
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findByBoardId(Long boardId) {
+        return postsRepository.findByBoardId(boardId).stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+
+    }
 }

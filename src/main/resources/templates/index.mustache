@@ -4,7 +4,7 @@
     <div id="main-content" class="col-md-9">
         <!-- 헤더 영역-->
         <div id="board-title-bar" class="d-flex justify-content-between shadow-box">
-            <span id="board-title">메인 페이지</span>
+            <span id="board-title"><a href="{{TitleLink}}">{{Title}}</a></span>
             <a href="/posts/save" class="btn btn-primary" role="button">글 등록</a>
         </div>
         <br>
@@ -20,8 +20,8 @@
                     <th>수정일</th>
                 </tr>
                 </thead>
-                <tbody id="tbody">
                 {{#posts}}
+                <tbody id="tbody">
                     <tr>
                         <td>{{id}}</td>
                         {{#board}}<td>{{board.title}}</td>{{/board}}
@@ -29,9 +29,10 @@
                         <td>{{author}}</td>
                         <td>{{modifiedDate}}</td>
                     </tr>
-                {{/posts}}
                 </tbody>
+                {{/posts}}
             </table>
+            {{^posts}}등록된 게시글이 없습니다.{{/posts}}
         </div>
     </div>
 </div>
