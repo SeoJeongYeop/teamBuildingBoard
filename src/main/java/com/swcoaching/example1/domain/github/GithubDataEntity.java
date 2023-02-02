@@ -10,8 +10,10 @@ public class GithubDataEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String githubId;
+    @Column(name = "nyear")
     private int year;
     private int starCount;
+    @Column(name = "commit_count")
     private int commitCount;
     private int prCount;
     private int issueCount;
