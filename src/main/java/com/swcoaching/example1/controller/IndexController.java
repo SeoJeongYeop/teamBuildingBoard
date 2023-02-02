@@ -50,11 +50,14 @@ public class IndexController {
     public String postsSave(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         model.addAttribute("boards", boardService.findAll());
         PostsResponseDto dto = postsService.findById(id);
-        model.addAttribute("post", dto);
         if (user != null) {
+            dto.checkAuthor(user.getId());
+            System.out.println("PostsResponseDto isAuthor");
+            System.out.println(dto.isAuthor());
             model.addAttribute("userName", user.getName());
             model.addAttribute("userPicture", user.getPicture());
         }
+        model.addAttribute("post", dto);
 
         return "post";
     }
@@ -64,6 +67,7 @@ public class IndexController {
         model.addAttribute("boards", boardService.findAll());
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            model.addAttribute("userId", user.getId());
         }
 
         return "posts-save";

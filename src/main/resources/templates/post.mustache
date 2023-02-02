@@ -18,28 +18,33 @@
         </div>
         <div id="article-content">
             <div id="article-wrapper">
+                {{#post}}
                 <div class="d-flex flex-row justify-content-between">
                     <div id="article-title">
-                        {{post.title}}
+                        {{title}}
                     </div>
                     <div id="article-metadata">
                         <div id="article-datetime">
                             <div>
-                                {{post.createdDate}}
+                                {{createdDate}}
                             </div>
                         </div>
+                        {{#isAuthor}}
                         <div class="d-flex flex-column justify-content-center">
-                            <a href="/posts/update/{{post.id}}">수정</a>
-                            <a href="/posts/delete/{{post.id}}">삭제</a>
+                            <a href="/posts/update/{{id}}">수정</a>
+                            <a href="/posts/delete/{{id}}">삭제</a>
                         </div>
+                        {{/isAuthor}}
                     </div>
                 </div>
                 <div class="gray-border"></div>
                 <div>
                     <div id="article-body">
-                        {{ post.content }}
+                        {{content}}
                     </div>
                 </div>
+                {{/post}}
+                {{^post}}<div>게시글이 없습니다.</div>{{/post}}
             </div>
         </div>
     </div>

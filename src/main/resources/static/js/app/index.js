@@ -17,6 +17,7 @@ const main = {
             author: $('#author').val(),
             content: $('#content').val(),
             boardId: parseInt($('#selectBoard').val()),
+            userId: parseInt($('#user').val()),
         };
 
         $.ajax({
@@ -73,10 +74,10 @@ const main = {
 main.init();
 $().ready(function () {
     let target = $("#selectBoard").data("target");
-    $(`option[value='${target}']`).attr("selected","selected");
+    $(`option[value='${target}']`).attr("selected", "selected");
     new SlimSelect({
         select: '#selectBoard',
-        settings:{
+        settings: {
             showSearch: false,
             placeholderText: '게시판',
         }

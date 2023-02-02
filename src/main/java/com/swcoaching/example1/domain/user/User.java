@@ -1,10 +1,14 @@
 package com.swcoaching.example1.domain.user;
 
 import com.swcoaching.example1.domain.BaseTimeEntity;
+import com.swcoaching.example1.domain.posts.PostsEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -28,8 +32,11 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    @OneToMany(mappedBy = "user")
+    public List<PostsEntity> posts = new ArrayList<>();
+
     @Builder
-    public User(String name, String email, String picture, Role role){
+    public User(String name, String email, String picture, Role role) {
         this.name = name;
         this.email = email;
         this.picture = picture;
@@ -38,12 +45,16 @@ public class User extends BaseTimeEntity {
 
     public User update(String name, String picture) {
         this.name = name;
-        this.picture = name;
+        this.picture = picture;
 
         return this;
     }
 
-    public String getRoleKey(){
+    public String getRoleKey() {
         return this.role.getKey();
+    }
+
+    public void addPosts(PostsEntity posts) {
+        this.posts.add(posts);
     }
 }

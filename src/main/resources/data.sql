@@ -1,16 +1,19 @@
 TRUNCATE TABLE member;
 INSERT INTO member(username, password, name, remark)
-VALUES
-    ('skku_student1','test1','학생1','테스트 학생'),
-    ('skku_student2','test2','학생2','테스트 학생');
+VALUES ('skku_student1', 'test1', '학생1', '테스트 학생'),
+       ('skku_student2', 'test2', '학생2', '테스트 학생');
 
-SET FOREIGN_KEY_CHECKS=0;
+SET
+FOREIGN_KEY_CHECKS=0;
 
 TRUNCATE TABLE board;
 INSERT INTO board(id, title, remark, created_date, modified_date)
-VALUES
-    (1,'자유게시판','이 게시판은 자유게시판입니다. 매너와 규칙 지켜주세요', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000'),
-    (2,'질문과 답변','이곳은 질문과 답변 게시판입니다. 매너와 규칙을 지켜주세요', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000');
+VALUES (1, '자유게시판', '이 게시판은 자유게시판입니다. 매너와 규칙 지켜주세요', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000'),
+       (2, '질문과 답변', '이곳은 질문과 답변 게시판입니다. 질문은 되도록 자세하게 써주세요', '2023-01-10T00:00:00.000000',
+        '2023-01-10T00:00:00.000000'),
+       (3, '정보게시판', '이곳은 정보게시판입니다. 개발에 도움이 될만한 정보를 올려주세요', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000'),
+       (4, '홍보게시판', '이곳은 홍보게시판입니다. 대회, 부트캠프, 인턴, 기타 행사 등 많은 사람들이 알았으면 하는 내용을 올려주세요', '2023-01-10T00:00:00.000000',
+        '2023-01-10T00:00:00.000000');
 
 TRUNCATE TABLE student;
 INSERT INTO student (github_id, name, semester)
@@ -25,10 +28,17 @@ INSERT INTO github_data (commit_count, follower_count, following_count, github_i
                          issue_count, pr_count, repo_count, star_count, year)
 VALUES (100, 1, 1, 'SeoJeongYeop', 10, 1, 10, 1, 2023);
 
-TRUNCATE TABLE post;
-INSERT INTO post (title, author, content, created_date, modified_date, board_id)
-VALUES
-    ('title', 'author', 'content', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000', 1),
-    ('title2', 'author2', 'content2', '2023-01-11T00:00:00.000000', '2023-01-11T00:00:00.000000', 1);
+TRUNCATE TABLE user;
+INSERT INTO user (email, name, picture, role, created_date, modified_date)
+VALUES ('sjyskku99@g.skku.edu', '서정엽', 'https://avatars.githubusercontent.com/u/41911523?s=40&v=4', 'ADMIN',
+        '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000');
 
-SET FOREIGN_KEY_CHECKS=1;
+
+TRUNCATE TABLE post;
+INSERT INTO post (title, author, content, created_date, modified_date, board_id, user_id)
+VALUES ('Hello World!!', '운영자', '자유게시판의 첫글입니다.', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000', 1, 1),
+       ('필요한 기능이 있나요?', '운영자', '필요한 기능이 있으면 댓글을 달아주세요. 댓글 기능도 곧 만들 거예요.', '2023-01-11T00:00:00.000000',
+        '2023-01-11T00:00:00.000000', 2, 1);
+
+SET
+FOREIGN_KEY_CHECKS=1;
