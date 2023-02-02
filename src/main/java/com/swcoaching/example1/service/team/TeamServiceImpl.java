@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Service
 public class TeamServiceImpl implements TeamService {
@@ -30,11 +33,27 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public TeamResponseDto findById(Long id) {
         Team entity = teamRepository.findById(id)
                 .orElseThrow(() -> new TeamNotFoundException(id));
 
+        return new TeamResponseDto(entity);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TeamResponseDto> findAll() {
+        return teamRepository.findAll().stream()
+                .map(TeamResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public TeamResponseDto findByName(String teamName) {
+        List<Team> teams = teamRepository.findByName(teamName);
+        if (teams.isEmpty()) throw new TeamNotFoundException(teamName);
+        Team entity = teams.get(0);
         return new TeamResponseDto(entity);
     }
 }

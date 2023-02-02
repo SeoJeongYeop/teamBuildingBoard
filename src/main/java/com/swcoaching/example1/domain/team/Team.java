@@ -2,6 +2,7 @@ package com.swcoaching.example1.domain.team;
 
 import com.swcoaching.example1.domain.BaseTimeEntity;
 import com.swcoaching.example1.domain.Status;
+import com.swcoaching.example1.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,7 +16,7 @@ public class Team extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = false, unique = true)
     private String name;
 
     @Column(columnDefinition = "TEXT")
@@ -23,8 +24,13 @@ public class Team extends BaseTimeEntity {
     @Column(length = 500)
     private String picture;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User owner;
 
     @Builder
     public Team(String name, String description, String picture, Status status) {
@@ -38,6 +44,10 @@ public class Team extends BaseTimeEntity {
         this.name = name;
         this.description = description;
         this.picture = picture;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public void block() {

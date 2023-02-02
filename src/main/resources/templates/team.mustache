@@ -1,0 +1,44 @@
+{{>layout/header}}
+<div id="main-container" class="row">
+    {{>layout/sidebar}}
+    <div id="main-content" class="col-md-9">
+        {{!헤더 영역}}
+        <div id="board-title-bar" class="d-flex justify-content-between">
+            <span id="board-title">{{title}}</span>
+            <a href="{{requestLink}}" class="btn btn-primary" role="button">{{requestText}}</a>
+        </div>
+        {{!컨텐츠 영역}}
+        <div id="article-content">
+            <div id="article-wrapper">
+                {{#team}}
+                <div class="d-flex flex-row justify-content-between">
+                    <div id="article-title">
+                        {{name}}
+                    </div>
+                    <div id="article-metadata">
+                        <div id="article-datetime">
+                            <div>
+                                {{createdDate}}
+                            </div>
+                        </div>
+                        {{#isOwner}}
+                        <div class="d-flex flex-column justify-content-center">
+                            <a href="/team/update/{{name}}">수정</a>
+                            <a href="/team/delete/{{name}}">삭제</a>
+                        </div>
+                        {{/isOwner}}
+                    </div>
+                </div>
+                <div class="gray-border"></div>
+                <div>
+                    <div id="article-body">
+                        {{description}}
+                    </div>
+                </div>
+                {{/team}}
+                {{^team}}<div>팀이 없습니다.</div>{{/team}}
+            </div>
+        </div>
+    </div>
+</div>
+{{>layout/footer}}

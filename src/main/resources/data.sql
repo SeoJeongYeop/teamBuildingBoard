@@ -20,8 +20,13 @@ INSERT INTO student (github_id, name, semester)
 VALUES ('SeoJeongYeop', '서정엽', 6);
 
 TRUNCATE TABLE team;
-INSERT INTO team (id, name, description, picture)
-VALUES (1, 'name', 'description', '/static/test.png');
+INSERT INTO team (name, status, description, picture, created_date, modified_date, user_id)
+VALUES ('2023 SW코칭 프로그램 - 스프링프레임워크', 'NORMAL', '스프링프레임워크로 웹애플리케이션 개발실무를 익히고 코드리뷰를 진행',
+        '/images/default-team.png', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000', 1),
+       ('2023 SW코칭 프로그램 - GitHub, DevOps', 'BLOCK', 'GitHub를 통해서 배워보는 기업용 파일 버전관리, 데브옵스 (DevOps)',
+        '/images/default-team.png', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000', 1),
+       ('SSA', 'NORMAL', 'SW중심대학사업에 필요한 웹 서비스 개발 및 운영에 참여 (서비스 기획 및 디자인, 웹 서비스 프론트엔드 및 백엔드 개발 및 운영, 인프라 보안 운영, 콘텐츠 운영)',
+        '/images/ssa.png', '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000', 1);
 
 TRUNCATE TABLE github_data;
 INSERT INTO github_data (commit_count, follower_count, following_count, github_id,
