@@ -1,4 +1,4 @@
-package com.swcoaching.example1.controller;
+package com.swcoaching.example1.controller.web;
 
 import com.swcoaching.example1.config.auth.LoginUser;
 import com.swcoaching.example1.config.auth.dto.SessionUser;
