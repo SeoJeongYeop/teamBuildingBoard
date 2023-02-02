@@ -1,5 +1,6 @@
 package com.swcoaching.example1.controller.dto;
 
+import com.swcoaching.example1.domain.Status;
 import com.swcoaching.example1.domain.team.Team;
 import lombok.Getter;
 
@@ -9,11 +10,13 @@ public class TeamResponseDto {
     private final String name;
     private final String description;
     private final String picture;
+    private final Status status;
 
     public TeamResponseDto(Team entity) {
         this.id = entity.getId();
         this.name = entity.getName();
         this.description = entity.getDescription();
         this.picture = entity.getPicture();
+        this.status = entity.getStatus();
     }
 }
