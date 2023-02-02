@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface TeamRepository extends JpaRepository<Team, Long> {
-    @Query("SELECT t FROM Team t ORDER BY t.name")
+    @Query("SELECT t FROM Team t WHERE t.name = ?1")
     List<Team> findByName(String teamName);
 }
