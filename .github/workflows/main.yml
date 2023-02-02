@@ -1,55 +1,47 @@
 on:
   push:
     branches:
-    - main
-    - release/*
+      - main
+      - release/*
   pull_request:
     branches:
-    - main
-    
+      - main
+
 jobs:
   push-test:
     name: push and build test
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-       
-    - uses: actions/setup-java@v3
-      with:
-        distribution: temurin
-        java-version: 17
-    
-    - name: Start MariaDB
-      uses: getong/mariadb-action@v1.1
-      with:
-        character set server: 'utf8'
-        mysql database: 'testdb'
-        mysql user: 'skku'
-        mysql password: ${{ secrets.MARIADB_PASSWORD }}
-        
-    - name: Gradle Build Action
-      uses: gradle/gradle-build-action@v2.3.3
-      
-    - name: Gradle Test
-      run: ./gradlew test
-  
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
-      env:        
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_ICON: https://github.com/rtCamp.png?size=48
-        SLACK_TITLE: 빌드 결과
-        SLACK_MESSAGE: |
-          > 배포 상태: `${{ job.status }}`
-          > Git Commit 메세지: `${{ github.event.head_commit.message }}`
-        SLACK_USERNAME: 배포 결과 알림
-        SLACK_COLOR: ${{ job.status }}
-        SLACK_FOOTER: '테스트 배포 입니다.'
-      if: always()
-    - name: Heroku deploy
-      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "team-build-app-sjy"
-        heroku_email: "sbcoba@gmail.com"
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Gradle Build Action
+        uses: gradle/gradle-build-action@v2.3.3
+
+      - name: Gradle Test
+        run: ./gradlew test
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_TITLE: 빌드 결과
+          SLACK_MESSAGE: |
+            > 배포 상태: `${{ job.status }}`
+            > Git Commit 메세지: `${{ github.event.head_commit.message }}`
+          SLACK_USERNAME: 배포 결과 알림
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_FOOTER: '테스트 배포 입니다.'
+        if: always()
+      - name: Heroku deploy
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_TOKEN}}
+          heroku_app_name: "springboot-team-build"
+          heroku_email: "sjyswe99@gmail.com"
