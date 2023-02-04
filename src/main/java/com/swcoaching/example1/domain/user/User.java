@@ -1,5 +1,6 @@
 package com.swcoaching.example1.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.swcoaching.example1.domain.BaseTimeEntity;
 import com.swcoaching.example1.domain.posts.PostsEntity;
 import jakarta.persistence.*;
@@ -33,6 +34,7 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     public List<PostsEntity> posts = new ArrayList<>();
 
@@ -49,6 +51,10 @@ public class User extends BaseTimeEntity {
         this.picture = picture;
 
         return this;
+    }
+
+    public void setRoleUser(){
+        this.role = Role.USER;
     }
 
     public String getRoleKey() {
