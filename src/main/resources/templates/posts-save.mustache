@@ -1,13 +1,21 @@
 {{>layout/header}}
 <h1>게시글 등록</h1>
-<div class="col-md-12">
-    <div class="col-md-4">
+<div id="main-container" class="row">
+    {{>layout/sidebar}}
+    <div id="main-content" class="col-md-9">
+        <div id="board-title-bar" class="d-flex justify-content-between">
+            <div id="board-title">
+                게시글 작성
+            </div>
+        </div>
         <form>
             <div class="form-group">
                 <label for="selectBoard">게시판</label>
-                <select name="board" id="selectBoard" required>
+                <select name="board" id="selectBoard" {{#board}}data-target="{{id}}{{/board}}" required>
                     <option data-placeholder="true"></option>
-                    {{#boards}}<option value="{{id}}">{{title}}</option>{{/boards}}
+                    {{#boards}}
+                        <option value="{{id}}">{{title}}</option>
+                    {{/boards}}
                 </select>
             </div>
             <div class="form-group">

@@ -5,7 +5,12 @@
         <!-- 헤더 영역-->
         <div id="board-title-bar" class="d-flex justify-content-between shadow-box">
             <span id="board-title"><a href="{{TitleLink}}">{{Title}}</a></span>
-            <a href="/posts/save" class="btn btn-primary" role="button">글 등록</a>
+            {{#saveLink}}
+                <a href="{{saveLink}}" class="btn btn-primary" role="button">글 등록</a>
+            {{/saveLink}}
+            {{^saveLink}}
+                <a href="/community/posts/save" class="btn btn-primary" role="button">글 등록</a>
+            {{/saveLink}}
         </div>
         <br>
         <!--목록 출력 영역-->
@@ -21,15 +26,16 @@
                 </tr>
                 </thead>
                 {{#posts}}
-                <tbody id="tbody">
+                    <tbody id="tbody">
                     <tr>
                         <td>{{id}}</td>
-                        {{#board}}<td>{{board.title}}</td>{{/board}}
+                        {{#board}}
+                            <td>{{board.title}}</td>{{/board}}
                         <td><a href="/community/posts/{{id}}">{{title}}</a></td>
                         <td>{{author}}</td>
                         <td>{{modifiedDate}}</td>
                     </tr>
-                </tbody>
+                    </tbody>
                 {{/posts}}
             </table>
             {{^posts}}등록된 게시글이 없습니다.{{/posts}}

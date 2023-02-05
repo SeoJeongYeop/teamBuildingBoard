@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Controller
@@ -51,7 +52,7 @@ public class IndexController {
     }
 
     @GetMapping("/community/boards/{boardId}")
-    public String community(@PathVariable Long boardId, Model model, @LoginUser SessionUser user) {
+    public String board(@PathVariable Long boardId, Model model, @LoginUser SessionUser user) {
 
         model.addAttribute("boards", boardService.findAll());
         Board dto = boardService.findById(boardId);
@@ -63,12 +64,12 @@ public class IndexController {
         }
         model.addAttribute("Title", dto.getTitle());
         model.addAttribute("TitleLink", "/community/boards/" + dto.getId());
-
+        model.addAttribute("saveLink", "/community/posts/save" + "?id=" + boardId);
         return "index";
     }
 
     @GetMapping("/community/posts/{id}")
-    public String postsSave(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+    public String posts(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         model.addAttribute("boards", boardService.findAll());
         PostsResponseDto dto = postsService.findById(id);
         if (user != null) {
@@ -83,9 +84,12 @@ public class IndexController {
         return "post";
     }
 
-    @GetMapping("/posts/save")
-    public String postsSave(Model model, @LoginUser SessionUser user) {
+    @GetMapping("/community/posts/save")
+    public String postsSave(@RequestParam(value = "id", required = false) Long id, Model model, @LoginUser SessionUser user) {
         model.addAttribute("boards", boardService.findAll());
+        if (id != null)
+            model.addAttribute("board", boardService.findById(id));
+
         if (user != null) {
             model.addAttribute("userName", user.getName());
             model.addAttribute("userId", user.getId());
