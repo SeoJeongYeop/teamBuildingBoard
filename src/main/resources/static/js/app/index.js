@@ -10,6 +10,9 @@ const main = {
         $('#btn-delete').on('click', () => {
             _this.delete();
         });
+        $('#btn-team-save').on('click', () => {
+            _this.saveTeam();
+        });
     },
     save: function () {
         let data = {
@@ -68,6 +71,28 @@ const main = {
         }).fail()(function (error) {
             alert(JSON.stringify(error));
         });
+    },
+    saveTeam: function () {
+
+        let data = {
+            name: $('#name').val(),
+            owner: $('#owner').val(),
+            description: $('#description').val(),
+            userId: parseInt($('#user').val()),
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/teams',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('팀이 생성되었습니다.');
+            window.location.href = '/teams';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     }
 };
 
@@ -83,11 +108,11 @@ $().ready(function () {
         }
     });
     // 현재 주소를 체크해서 사이드바의 아이템의 폰트 색을 변경
-    $('.sidebar-link').each(function() {
+    $('.sidebar-link').each(function () {
         console.log("$(this).attr('href')", $(this).attr('href'));
         console.log("window.location.pathname", window.location.pathname);
 
-        if($(this).attr('href') === window.location.pathname) {
+        if ($(this).attr('href') === window.location.pathname) {
             $(this).parent().addClass('selected');
         }
     });
@@ -98,8 +123,7 @@ $().ready(function () {
             $(this).addClass('bi-chevron-up');
             $(this).removeClass('bi-chevron-down');
             $(target).removeClass('none');
-        }
-        else {
+        } else {
             $(this).addClass('bi-chevron-down');
             $(this).removeClass('bi-chevron-up');
             $(target).addClass('none');

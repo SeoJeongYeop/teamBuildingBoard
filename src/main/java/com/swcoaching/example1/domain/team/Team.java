@@ -50,6 +50,10 @@ public class Team extends BaseTimeEntity {
         this.owner = owner;
     }
 
+    public void setStatusNormal() {
+        this.status = Status.NORMAL;
+    }
+
     public void block() {
         this.status = Status.BLOCK;
     }

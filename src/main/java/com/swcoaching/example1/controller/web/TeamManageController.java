@@ -52,4 +52,17 @@ public class TeamManageController {
 
         return "team";
     }
+
+    @GetMapping("/teams/save")
+    public String teamSave(Model model, @LoginUser SessionUser user) {
+        model.addAttribute("boards", boardService.findAll());
+        model.addAttribute("boards", boardService.findAll());
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userId", user.getId());
+        }
+
+        return "team-save";
+    }
 }

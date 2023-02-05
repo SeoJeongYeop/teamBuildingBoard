@@ -25,7 +25,13 @@
                         <td>{{id}}</td>
                         <td>
                             <a href="/teams/{{name}}">
-                                <img width="20px" height="20px" src="{{picture}}" alt="팀 이미지" class="rounded-1">
+                                {{#picture}}
+                                    <img width="20px" height="20px" src="{{picture}}" alt="팀 이미지" class="rounded-1">
+                                {{/picture}}
+                                {{^picture}}
+                                    <img width="20px" height="20px" src="/images/default-team.png" alt="팀 이미지"
+                                         class="rounded-1">
+                                {{/picture}}
                                 <span>{{name}}</span>
                             </a>
                         </td>

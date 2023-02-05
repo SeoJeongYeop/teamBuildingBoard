@@ -13,13 +13,15 @@ public class TeamSaveRequestDto {
     private String description;
     private String picture;
     private Status status;
+    private long userId;
 
     @Builder
-    public TeamSaveRequestDto(String name, String description, String picture) {
+    public TeamSaveRequestDto(String name, String description, String picture, long userId) {
         this.name = name;
         this.description = description;
         this.picture = picture;
         this.status = Status.NORMAL;
+        this.userId = userId;
     }
 
     public Team toEntity() {
