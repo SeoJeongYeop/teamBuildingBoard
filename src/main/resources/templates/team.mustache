@@ -4,7 +4,9 @@
     <div id="main-content" class="col-md-9">
         {{!헤더 영역}}
         <div id="board-title-bar" class="d-flex justify-content-between">
-            <span id="board-title">{{title}}</span>
+            <div id="board-title">
+                <a href="/teams">{{title}}</a>
+            </div>
             <a href="{{requestLink}}" class="btn btn-primary" role="button">{{requestText}}</a>
         </div>
         {{!컨텐츠 영역}}
@@ -23,8 +25,8 @@
                         </div>
                         {{#isOwner}}
                         <div class="d-flex flex-column justify-content-center">
-                            <a href="/team/update/{{name}}">수정</a>
-                            <a href="/team/delete/{{name}}">삭제</a>
+                            <a href="/teams/update/{{id}}">수정</a>
+                            <a href="/teams/delete/{{id}}">삭제</a>
                         </div>
                         {{/isOwner}}
                     </div>

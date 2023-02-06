@@ -13,6 +13,9 @@ const main = {
         $('#btn-team-save').on('click', () => {
             _this.saveTeamImage();
         });
+        $('#btn-team-update').on('click', () => {
+            _this.updateTeamImage();
+        });
     },
     save: function () {
         let data = {
@@ -114,6 +117,53 @@ const main = {
             });
         } else {
             main.saveTeam(null);
+        }
+    },
+    updateTeam: function (img) {
+        let data = {
+            name: $('#name').val(),
+            owner: $('#owner').val(),
+            description: $('#description').val(),
+            userId: parseInt($('#user').val()),
+        };
+        let id = $('#id').val();
+        if (img != null) {
+            data["picture"] = img
+        }
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/teams/' + id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function (data) {
+            console.log("data", data);
+            alert('팀 정보를 업데이트했습니다.');
+            window.location.href = '/teams';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    updateTeamImage: function () {
+        let inputPicture = $('#picture')[0];
+        if (inputPicture.files.length > 0) {
+            let formData = new FormData();
+            formData.append('uploadImage', inputPicture.files[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/images',
+                processData: false,
+                contentType: false,
+                data: formData
+            }).done(function (data) {
+                main.updateTeam(data);
+            }).fail(function (error) {
+                console.log(error);
+                alert("사진 저장에 실패했습니다.");
+                main.updateTeam(null);
+            });
+        } else {
+            main.updateTeam(null);
         }
     },
 

@@ -4,7 +4,9 @@
     <div id="main-content" class="col-md-9">
         {{!헤더 영역}}
         <div id="board-title-bar" class="d-flex justify-content-between shadow-box">
-            <span id="board-title">{{title}}</span>
+            <div id="board-title">
+                <a href="/teams">{{title}}</a>
+            </div>
             <a href="{{createLink}}" class="btn btn-primary" role="button">{{createText}}</a>
         </div>
         <br>
@@ -24,7 +26,7 @@
                     <tr>
                         <td>{{id}}</td>
                         <td>
-                            <a href="/teams/{{name}}">
+                            <a href="/teams/{{id}}">
                                 {{#picture}}
                                     <img width="20px" height="20px" src="{{picture}}" alt="팀 이미지" class="rounded-1">
                                 {{/picture}}

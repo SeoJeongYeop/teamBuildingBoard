@@ -1,0 +1,42 @@
+{{>layout/header}}
+<div id="main-container" class="row">
+    {{>layout/sidebar}}
+    <div id="main-content" class="col-md-9">
+        <div id="board-title-bar" class="d-flex justify-content-between">
+            <div id="board-title">
+                팀 수정
+            </div>
+        </div>
+        <form>
+            <input type="hidden" id="id" class="form-control" value="{{team.id}}" readonly>
+            <div class="form-group mb-2">
+                <label for="name">팀 이름</label>
+                <input type="text" id="name" class="form-control" value="{{team.name}}">
+            </div>
+            <div class="form-group mb-2">
+                <label for="owner">팀장</label>
+                {{#team}}
+                    <input type="text" id="owner" class="form-control" value="{{owner.name}}" readonly>
+                    <input type="hidden" id="user" value="{{owner.id}}">
+                {{/team}}
+                {{^team}}
+                    <input type="text" id="owner" class="form-control" placeholder="팀장 이름을 입력하세요" required>
+                {{/team}}
+            </div>
+            <div class="form-group mb-2">
+                <label for="description">팀 설명</label>
+                <textarea id="description" class="form-control">{{team.description}}</textarea>
+            </div>
+            <div class="form-group mb-2">
+                <label for="description">팀 이미지</label>
+                <label for="description" class="text-weak">이미지 교체를 원하시면 선택해주세요</label>
+                <input type="file" id="picture" class="form-control">
+            </div>
+        </form>
+        <div class="d-flex justify-content-end my-3 gap-2">
+            <a href="/" role="button" class="btn btn-secondary">취소</a>
+            <button type="button" id="btn-team-update" class="btn btn-primary">수정완료</button>
+        </div>
+    </div>
+</div>
+{{>layout/footer}}

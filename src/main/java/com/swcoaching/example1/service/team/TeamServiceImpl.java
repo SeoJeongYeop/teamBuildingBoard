@@ -2,6 +2,7 @@ package com.swcoaching.example1.service.team;
 
 import com.swcoaching.example1.controller.dto.TeamResponseDto;
 import com.swcoaching.example1.controller.dto.TeamSaveRequestDto;
+import com.swcoaching.example1.controller.dto.TeamUpdateRequestDto;
 import com.swcoaching.example1.domain.team.Team;
 import com.swcoaching.example1.domain.team.TeamRepository;
 import com.swcoaching.example1.domain.user.User;
@@ -36,7 +37,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     @Transactional
-    public Long update(Long id, TeamSaveRequestDto requestDto) {
+    public Long update(Long id, TeamUpdateRequestDto requestDto) {
         Team team = teamRepository.findById(id)
                 .orElseThrow(() -> new TeamNotFoundException(id));
 

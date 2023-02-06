@@ -3,6 +3,7 @@ package com.swcoaching.example1.controller;
 
 import com.swcoaching.example1.controller.dto.TeamResponseDto;
 import com.swcoaching.example1.controller.dto.TeamSaveRequestDto;
+import com.swcoaching.example1.controller.dto.TeamUpdateRequestDto;
 import com.swcoaching.example1.controller.dto.UserTeamSaveRequestDto;
 import com.swcoaching.example1.domain.relation.RelationStatus;
 import com.swcoaching.example1.service.relation.UserTeamService;
@@ -27,7 +28,8 @@ public class TeamController {
     }
 
     @PutMapping("/api/v1/teams/{id}")
-    public Long update(@PathVariable Long id, @RequestBody TeamSaveRequestDto requestDto) {
+    public Long update(@PathVariable Long id, @RequestBody TeamUpdateRequestDto requestDto) {
+        System.out.println("team update: "+id);
         return teamService.update(id, requestDto);
     }
 
