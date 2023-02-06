@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum RelationStatus {
 
     IN("STATUS_IN", "소속"),
+    WAIT("STATUS_WAIT", "대기"),
     QUIT("STATUS_QUIT", "탈퇴"),
     BLOCK("STATUS_BLOCK", "차단"),
     DELETE("STATUS_DELETE", "삭제");

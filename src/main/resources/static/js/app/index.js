@@ -16,6 +16,9 @@ const main = {
         $('#btn-team-update').on('click', () => {
             _this.updateTeamImage();
         });
+        $('#btn-team-apply').on('click', () => {
+            _this.applyTeam();
+        });
     },
     save: function () {
         let data = {
@@ -165,6 +168,27 @@ const main = {
         } else {
             main.updateTeam(null);
         }
+    },
+    applyTeam: function () {
+        console.log("apply Team");
+        let data = {
+            content: $('#content').val(),
+            userId: parseInt($('#user').val()),
+            teamId: parseInt($('#team').val()),
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/user-team-relations',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('팀에 지원했습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     },
 
 };

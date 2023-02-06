@@ -21,13 +21,16 @@ public class UserTeamServiceImpl implements UserTeamService {
 
     @Override
     @Transactional
-    public Long save(UserTeamSaveRequestDto requestDto) {
+    public Long save(UserTeamSaveRequestDto requestDto, Long msgId) {
+        System.out.println("relation service save: " + msgId);
         UserTeamRelation relationEntity = requestDto.toEntity();
         User user = userRepository.getReferenceById(requestDto.getUserId());
         Team team = teamRepository.getReferenceById(requestDto.getTeamId());
 
         relationEntity.setUser(user);
         relationEntity.setTeam(team);
+        relationEntity.setMSg(msgId);
+        relationEntity.waitTeam();
 
         return userTeamRepository.save(relationEntity).getId();
     }
@@ -50,7 +53,6 @@ public class UserTeamServiceImpl implements UserTeamService {
                 .orElseThrow(() -> new UserTeamNotFoundException(id));
         System.out.println("Service findById: status=" + entity.getRelationStatus());
         System.out.println("Service findById: id=" + entity.getUser().getId());
-        System.out.println("Service findById: id=" + entity.getTeam().getName());
 
         return new UserTeamResponseDto(entity);
     }

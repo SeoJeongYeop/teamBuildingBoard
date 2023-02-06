@@ -28,11 +28,14 @@ public class UserTeamRelation extends BaseTimeEntity {
     @JoinColumn(name = "teamId")
     private Team team;
 
+    private Long msgId;
+
     @Builder
-    public UserTeamRelation(User user, Team team, RelationStatus relationStatus) {
+    public UserTeamRelation(User user, Team team, RelationStatus relationStatus, Long msgId) {
         this.user = user;
         this.team = team;
         this.relationStatus = relationStatus;
+        this.msgId = msgId;
     }
 
     public void setUser(User user) {
@@ -41,6 +44,14 @@ public class UserTeamRelation extends BaseTimeEntity {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public void setMSg(Long msgId) {
+        this.msgId = msgId;
+    }
+
+    public void waitTeam() {
+        this.relationStatus = RelationStatus.WAIT;
     }
 
     public void quitTeam() {

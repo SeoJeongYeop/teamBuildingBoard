@@ -11,11 +11,13 @@ public class UserTeamSaveRequestDto {
     private long userId;
     private long teamId;
     private RelationStatus relationStatus;
+    private String content;
 
-    public UserTeamSaveRequestDto(long userId, long teamId, RelationStatus relationStatus) {
+    public UserTeamSaveRequestDto(long userId, long teamId, RelationStatus status, String content) {
         this.userId = userId;
         this.teamId = teamId;
-        this.relationStatus = relationStatus;
+        this.relationStatus = status;
+        this.content = content;
     }
 
     public UserTeamRelation toEntity() {
@@ -23,5 +25,4 @@ public class UserTeamSaveRequestDto {
                 .relationStatus(relationStatus)
                 .build();
     }
-
 }

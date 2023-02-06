@@ -21,15 +21,15 @@ public class TeamController {
     @PostMapping("/api/v1/teams")
     public Long save(@RequestBody TeamSaveRequestDto requestDto) {
         Long teamId = teamService.save(requestDto);
-        UserTeamSaveRequestDto entity = new UserTeamSaveRequestDto(requestDto.getUserId(), teamId, RelationStatus.IN);
-        Long relationId = userTeamService.save(entity);
+        UserTeamSaveRequestDto entity = new UserTeamSaveRequestDto(requestDto.getUserId(), teamId, RelationStatus.IN, null);
+        Long relationId = userTeamService.save(entity, null);
         System.out.println("teams save teamId=" + teamId + " relationId" + relationId);
         return teamId;
     }
 
     @PutMapping("/api/v1/teams/{id}")
     public Long update(@PathVariable Long id, @RequestBody TeamUpdateRequestDto requestDto) {
-        System.out.println("team update: "+id);
+        System.out.println("team update: " + id);
         return teamService.update(id, requestDto);
     }
 

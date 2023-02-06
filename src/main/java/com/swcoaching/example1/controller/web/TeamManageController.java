@@ -58,6 +58,21 @@ public class TeamManageController {
         return "team";
     }
 
+    @GetMapping("/teams/application/{teamId}")
+    public String teamApplication(@PathVariable Long teamId, Model model, @LoginUser SessionUser user) {
+        TeamResponseDto dto = teamService.findById(teamId);
+        model.addAttribute("boards", boardService.findAll());
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userId", user.getId());
+            model.addAttribute("userPicture", user.getPicture());
+        }
+        model.addAttribute("team", dto);
+
+        return "team-application";
+    }
+
     @GetMapping("/teams/save")
     public String teamSave(Model model, @LoginUser SessionUser user) {
         model.addAttribute("boards", boardService.findAll());
@@ -73,10 +88,9 @@ public class TeamManageController {
 
     @GetMapping("/teams/update/{teamId}")
     public String teamUpdate(@PathVariable Long teamId, Model model, @LoginUser SessionUser user) {
-        System.out.println("teamId="+teamId);
+        System.out.println("teamId=" + teamId);
         TeamResponseDto dto = teamService.findById(teamId);
-        System.out.println("teamName="+dto.getName());
-        System.out.println("teamOwner="+dto.getOwner().getName());
+        System.out.println("teamName=" + dto.getName());
         model.addAttribute("team", dto);
         model.addAttribute("boards", boardService.findAll());
         if (user != null) {
