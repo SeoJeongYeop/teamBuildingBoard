@@ -3,7 +3,9 @@ package com.swcoaching.example1.controller;
 import com.swcoaching.example1.controller.dto.TeamResponseDto;
 import com.swcoaching.example1.domain.Status;
 import com.swcoaching.example1.domain.team.Team;
+import com.swcoaching.example1.service.relation.UserTeamService;
 import com.swcoaching.example1.service.team.TeamService;
+import com.swcoaching.example1.service.user.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
@@ -23,8 +24,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(TeamController.class)
 public class TeamControllerTest {
 
-    @MockBean(name = "teamService")
+    @MockBean
     private TeamService teamService;
+
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private UserTeamService userTeamService;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -38,6 +46,7 @@ public class TeamControllerTest {
         String description = "description";
         String picture = "/static/test.png";
         Status status = Status.NORMAL;
+
         when(teamService.findById(id))
                 .thenReturn(new TeamResponseDto(Team.builder()
                         .name(name)
@@ -49,6 +58,8 @@ public class TeamControllerTest {
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/v1/teams/{id}", id))
                 .andDo(print());
+
+        System.out.println("resultActions " + resultActions);
 
         //then
         resultActions

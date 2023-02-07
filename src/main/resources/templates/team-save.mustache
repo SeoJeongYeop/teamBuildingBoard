@@ -1,0 +1,41 @@
+{{>layout/header}}
+<div id="main-container" class="row">
+    {{>layout/sidebar}}
+    <div id="main-content" class="col-md-9">
+        <div id="board-title-bar" class="d-flex justify-content-between">
+            <div id="board-title">
+                팀 만들기
+            </div>
+        </div>
+        <form enctype="multipart/form-data">
+            <div class="form-group mb-2">
+                <label for="name">팀 이름</label>
+                <input type="text" id="name" class="form-control" placeholder="팀 이름을 입력하세요">
+            </div>
+            <div class="form-group mb-2">
+                <label for="owner">팀장</label>
+                {{#userName}}
+                    <input type="text" id="owner" class="form-control" value="{{userName}}" readonly>
+                    <input type="hidden" id="user" value="{{userId}}">
+                {{/userName}}
+                {{^userName}}
+                    <input type="text" id="owner" class="form-control" placeholder="팀장 이름을 입력하세요" required>
+                {{/userName}}
+            </div>
+            <div class="form-group mb-2">
+                <label for="description">설명</label>
+                <textarea id="description" class="form-control" placeholder="내용을 입력하세요"></textarea>
+            </div>
+            <div class="form-group mb-2">
+                <label for="description">팀 이미지</label>
+                <input type="file" id="picture" class="form-control" placeholder="사진을 선택하세요">
+            </div>
+        </form>
+        <div class="d-flex justify-content-end my-3 gap-2">
+            <a href="/teams" role="button" class="btn btn-secondary">취소</a>
+            <button type="button" id="btn-team-save" class="btn btn-primary">등록</button>
+        </div>
+    </div>
+</div>
+
+{{>layout/footer}}

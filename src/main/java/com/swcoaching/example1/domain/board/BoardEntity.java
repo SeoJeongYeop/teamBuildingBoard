@@ -1,5 +1,6 @@
 package com.swcoaching.example1.domain.board;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.swcoaching.example1.domain.BaseTimeEntity;
 import com.swcoaching.example1.domain.posts.PostsEntity;
 import lombok.Builder;
@@ -41,6 +42,7 @@ public class BoardEntity extends BaseTimeEntity {
     /**
      * 게시물
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "board")
     public List<PostsEntity> posts = new ArrayList<>();
 
@@ -49,6 +51,7 @@ public class BoardEntity extends BaseTimeEntity {
         this.title = title;
         this.remark = remark;
     }
+
     public void addPosts(PostsEntity posts) {
         this.posts.add(posts);
     }

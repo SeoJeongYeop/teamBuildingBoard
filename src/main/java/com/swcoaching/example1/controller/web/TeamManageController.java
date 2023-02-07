@@ -26,6 +26,7 @@ public class TeamManageController {
 
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            model.addAttribute("userId", user.getId());
             model.addAttribute("userPicture", user.getPicture());
         }
         // 렌더링 요소
@@ -36,20 +37,68 @@ public class TeamManageController {
         return "teamList";
     }
 
-    @GetMapping("/teams/{teamName}")
-    public String team(@PathVariable String teamName, Model model, @LoginUser SessionUser user) {
-        TeamResponseDto dto = teamService.findByName(teamName);
+    @GetMapping("/teams/{teamId}")
+    public String team(@PathVariable Long teamId, Model model, @LoginUser SessionUser user) {
+        TeamResponseDto dto = teamService.findById(teamId);
+        model.addAttribute("boards", boardService.findAll());
+
+        if (user != null) {
+            dto.checkOwner(user.getId());
+            System.out.println("TeamResponseDto isOwner");
+            System.out.println(dto.isOwner());
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userId", user.getId());
+            model.addAttribute("userPicture", user.getPicture());
+        }
         model.addAttribute("team", dto);
+        model.addAttribute("title", "팀 둘러보기");
+        model.addAttribute("requestText", "지원하기");
+        model.addAttribute("requestLink", "/teams/application/" + teamId);
+
+        return "team";
+    }
+
+    @GetMapping("/teams/application/{teamId}")
+    public String teamApplication(@PathVariable Long teamId, Model model, @LoginUser SessionUser user) {
+        TeamResponseDto dto = teamService.findById(teamId);
         model.addAttribute("boards", boardService.findAll());
 
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            model.addAttribute("userId", user.getId());
             model.addAttribute("userPicture", user.getPicture());
         }
-        model.addAttribute("title", "팀 더보기");
-        model.addAttribute("requestText", "지원하기");
-        model.addAttribute("requestLink", "/teams/application/" + teamName);
+        model.addAttribute("team", dto);
 
-        return "team";
+        return "team-application";
+    }
+
+    @GetMapping("/teams/save")
+    public String teamSave(Model model, @LoginUser SessionUser user) {
+        model.addAttribute("boards", boardService.findAll());
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userId", user.getId());
+            model.addAttribute("userPicture", user.getPicture());
+        }
+
+        return "team-save";
+    }
+
+    @GetMapping("/teams/update/{teamId}")
+    public String teamUpdate(@PathVariable Long teamId, Model model, @LoginUser SessionUser user) {
+        System.out.println("teamId=" + teamId);
+        TeamResponseDto dto = teamService.findById(teamId);
+        System.out.println("teamName=" + dto.getName());
+        model.addAttribute("team", dto);
+        model.addAttribute("boards", boardService.findAll());
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userId", user.getId());
+            model.addAttribute("userPicture", user.getPicture());
+        }
+
+        return "team-update";
     }
 }

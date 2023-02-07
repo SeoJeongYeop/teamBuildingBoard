@@ -1,6 +1,5 @@
 package com.swcoaching.example1.controller.dto;
 
-import com.swcoaching.example1.domain.Status;
 import com.swcoaching.example1.domain.team.Team;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,20 +7,16 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class TeamSaveRequestDto {
+public class TeamUpdateRequestDto {
     private String name;
     private String description;
     private String picture;
-    private Status status;
-    private long userId;
 
     @Builder
-    public TeamSaveRequestDto(String name, String description, String picture, long userId) {
+    public TeamUpdateRequestDto(String name, String description, String picture) {
         this.name = name;
         this.description = description;
         this.picture = picture;
-        this.status = Status.NORMAL;
-        this.userId = userId;
     }
 
     public Team toEntity() {
@@ -29,7 +24,6 @@ public class TeamSaveRequestDto {
                 .name(name)
                 .description(description)
                 .picture(picture)
-                .status(status)
                 .build();
     }
 }

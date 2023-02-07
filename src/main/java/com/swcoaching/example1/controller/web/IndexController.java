@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Controller
@@ -20,17 +21,18 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
-        // postService.findAllDesc()로 가져온 결과를 posts로 index.mustach에 전달
+        // postService.findAllDesc()로 가져온 결과를 posts 로 index.mustache 에 전달
         model.addAttribute("boards", boardService.findAll());
         model.addAttribute("posts", postsService.findAllDesc());
 
         //index 메소드 외에 다른 컨트롤러와 메소드에서 세션값이 필요하면 그때마다 직접 세션에서 값을 가져와야한다.
         // SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        // -> @LoginUser로 개선한다.
+        // -> @LoginUser 로 개선한다.
 
         if (user != null) {
             model.addAttribute("userName", user.getName());
             model.addAttribute("userPicture", user.getPicture());
+            model.addAttribute("userId", user.getId());
         }
         model.addAttribute("Title", "메인 페이지");
         model.addAttribute("TitleLink", "/");
@@ -45,13 +47,14 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("userName", user.getName());
             model.addAttribute("userPicture", user.getPicture());
+            model.addAttribute("userId", user.getId());
         }
 
         return "board";
     }
 
     @GetMapping("/community/boards/{boardId}")
-    public String community(@PathVariable Long boardId, Model model, @LoginUser SessionUser user) {
+    public String board(@PathVariable Long boardId, Model model, @LoginUser SessionUser user) {
 
         model.addAttribute("boards", boardService.findAll());
         Board dto = boardService.findById(boardId);
@@ -60,15 +63,16 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("userName", user.getName());
             model.addAttribute("userPicture", user.getPicture());
+            model.addAttribute("userId", user.getId());
         }
         model.addAttribute("Title", dto.getTitle());
         model.addAttribute("TitleLink", "/community/boards/" + dto.getId());
-
+        model.addAttribute("saveLink", "/community/posts/save" + "?id=" + boardId);
         return "index";
     }
 
     @GetMapping("/community/posts/{id}")
-    public String postsSave(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+    public String posts(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         model.addAttribute("boards", boardService.findAll());
         PostsResponseDto dto = postsService.findById(id);
         if (user != null) {
@@ -77,17 +81,22 @@ public class IndexController {
             System.out.println(dto.isAuthor());
             model.addAttribute("userName", user.getName());
             model.addAttribute("userPicture", user.getPicture());
+            model.addAttribute("userId", user.getId());
         }
         model.addAttribute("post", dto);
 
         return "post";
     }
 
-    @GetMapping("/posts/save")
-    public String postsSave(Model model, @LoginUser SessionUser user) {
+    @GetMapping("/community/posts/save")
+    public String postsSave(@RequestParam(value = "id", required = false) Long id, Model model, @LoginUser SessionUser user) {
         model.addAttribute("boards", boardService.findAll());
+        if (id != null)
+            model.addAttribute("board", boardService.findById(id));
+
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            model.addAttribute("userPicture", user.getPicture());
             model.addAttribute("userId", user.getId());
         }
 
@@ -99,8 +108,12 @@ public class IndexController {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
         model.addAttribute("boards", boardService.findAll());
+        if (id != null)
+            model.addAttribute("board", boardService.findById(id));
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            model.addAttribute("userPicture", user.getPicture());
+            model.addAttribute("userId", user.getId());
         }
 
         return "posts-update";

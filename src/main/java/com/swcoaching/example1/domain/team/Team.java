@@ -43,11 +43,16 @@ public class Team extends BaseTimeEntity {
     public void update(String name, String description, String picture) {
         this.name = name;
         this.description = description;
-        this.picture = picture;
+        if (picture != null)
+            this.picture = picture;
     }
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public void setStatusNormal() {
+        this.status = Status.NORMAL;
     }
 
     public void block() {
