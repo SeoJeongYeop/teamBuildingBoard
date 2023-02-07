@@ -1,3 +1,8 @@
+--TRUNCATE TABLE 'user';
+INSERT INTO app_user (email, name, picture, role, created_date, modified_date)
+VALUES ('sjyskku99@g.skku.edu', '서정엽', 'https://avatars.githubusercontent.com/u/41911523?s=40&v=4', 'ADMIN',
+        '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000');
+
 --TRUNCATE TABLE member;
 INSERT INTO member(username, password, name, remark)
 VALUES ('skku_student1', 'test1', '학생1', '테스트 학생'),
@@ -34,11 +39,6 @@ VALUES ('2023 SW코칭 프로그램 - 스프링프레임워크', 'NORMAL', '스�
 INSERT INTO github_data (commit_count, follower_count, following_count, github_id,
                          issue_count, pr_count, repo_count, star_count, date_year)
 VALUES (100, 1, 1, 'SeoJeongYeop', 10, 1, 10, 1, 2023);
-
---TRUNCATE TABLE 'user';
-INSERT INTO app_user (email, name, picture, role, created_date, modified_date)
-VALUES ('sjyskku99@g.skku.edu', '서정엽', 'https://avatars.githubusercontent.com/u/41911523?s=40&v=4', 'ADMIN',
-        '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000');
 
 --TRUNCATE TABLE user_team_relation;
 INSERT INTO user_team_relation (user_id, team_id, relation_status, created_date, modified_date)

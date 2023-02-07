@@ -8,15 +8,25 @@ import com.swcoaching.example1.controller.dto.UserTeamSaveRequestDto;
 import com.swcoaching.example1.domain.relation.RelationStatus;
 import com.swcoaching.example1.service.relation.UserTeamService;
 import com.swcoaching.example1.service.team.TeamService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RestController
+@RequestMapping
 public class TeamController {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private final TeamService teamService;
     private final UserTeamService userTeamService;
 
+    @GetMapping("/api/v1/teams/{id}")
+    public TeamResponseDto findById(@PathVariable Long id) {
+        TeamResponseDto team = teamService.findById(id);
+        logger.info("Team: {}", team);
+        return team;
+    }
 
     @PostMapping("/api/v1/teams")
     public Long save(@RequestBody TeamSaveRequestDto requestDto) {
@@ -31,11 +41,6 @@ public class TeamController {
     public Long update(@PathVariable Long id, @RequestBody TeamUpdateRequestDto requestDto) {
         System.out.println("team update: " + id);
         return teamService.update(id, requestDto);
-    }
-
-    @GetMapping("/api/v1/teams/{id}")
-    public TeamResponseDto findById(@PathVariable Long id) {
-        return teamService.findById(id);
     }
 
 }
