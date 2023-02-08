@@ -118,4 +118,13 @@ public class IndexController {
 
         return "posts-update";
     }
+
+    @GetMapping("/account/login")
+    public String login() {
+        return "login";
+    }
+    @GetMapping("/account/register")
+    public String register() {
+        return "register";
+    }
 }

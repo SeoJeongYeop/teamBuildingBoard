@@ -1,6 +1,6 @@
 --TRUNCATE TABLE 'user';
-INSERT INTO app_user (email, name, picture, role, created_date, modified_date)
-VALUES ('sjyskku99@g.skku.edu', '서정엽', 'https://avatars.githubusercontent.com/u/41911523?s=40&v=4', 'ADMIN',
+INSERT INTO app_user (email, name, password, picture, role, created_date, modified_date)
+VALUES ('sjyskku99@g.skku.edu', '서정엽', '1234', 'https://avatars.githubusercontent.com/u/41911523?s=40&v=4', 'USER',
         '2023-01-10T00:00:00.000000', '2023-01-10T00:00:00.000000');
 
 --TRUNCATE TABLE member;

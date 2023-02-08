@@ -1,6 +1,9 @@
 const main = {
     init: function () {
         let _this = this;
+        $('#btn-login').on('click', () => {
+            _this.login();
+        });
         $('#btn-save').on('click', () => {
             _this.save();
         });
@@ -18,6 +21,25 @@ const main = {
         });
         $('#btn-team-apply').on('click', () => {
             _this.applyTeam();
+        });
+    },
+    login: function () {
+        let data = {
+            username: $('#username').val(),
+            password: $('#password').val(),
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/account/login',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function (data) {
+            console.log(data['msg']);
+            alert(data['msg']);
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
         });
     },
     save: function () {

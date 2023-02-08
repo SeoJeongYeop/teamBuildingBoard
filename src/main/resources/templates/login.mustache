@@ -1,7 +1,7 @@
 {{>layout/header}}
 <div class="d-flex justify-content-center container my-4">
-    <div class="col-3">
-        <form method="post" action=".">
+    <div class="col-4">
+        <form>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="username" id="username" placeholder="exampleusername" required>
                 <label for="username">Username</label>
@@ -11,7 +11,7 @@
                 <label for="password">Password</label>
             </div>
             <div class="d-flex flex-column">
-                <button type="submit" class="btn btn-primary mb-3">Log In</button>
+                <button id="btn-login" type="button" class="btn btn-primary mb-3">Log In</button>
                 <div class="d-flex justify-content-center mb-3">
                     <span class="endpoint left"></span>
                     <span class="w-100 line-connect"></span>
