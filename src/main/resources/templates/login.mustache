@@ -1,0 +1,30 @@
+{{>layout/header}}
+<div class="d-flex justify-content-center container my-4">
+    <div class="col-3">
+        <form method="post" action=".">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="username" id="username" placeholder="exampleusername" required>
+                <label for="username">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" name="password" id="password" placeholder="examplepw" required>
+                <label for="password">Password</label>
+            </div>
+            <div class="d-flex flex-column">
+                <button type="submit" class="btn btn-primary mb-3">Log In</button>
+                <div class="d-flex justify-content-center mb-3">
+                    <span class="endpoint left"></span>
+                    <span class="w-100 line-connect"></span>
+                    <span class="endpoint right"></span>
+                </div>
+                <a class="btn btn-secondary mb-3" role="button" href="/oauth2/authorization/google">
+                    <span>Google LogIn</span>
+                </a>
+                <a class="btn btn-outline-secondary mb-3" role="button" href="/account/register">
+                    <span>Sign Up</span>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{{>layout/footer}}
