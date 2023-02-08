@@ -81,4 +81,12 @@ public class PostsService {
                 .collect(Collectors.toList());
 
     }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findByUserIdDesc(Long userId) {
+        return postsRepository.findByUserIdDesc(userId).stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+
+    }
 }

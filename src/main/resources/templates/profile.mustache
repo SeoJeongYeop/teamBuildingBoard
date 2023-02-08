@@ -1,0 +1,138 @@
+{{>layout/header}}
+<div id="main-container" class="row">
+    {{>layout/sidebar}}
+    <div class="col-md-9">
+        <section class="mx-auto mt-5">
+            <div class="d-flex justify-content-center">
+                <span class="endpoint left"></span>
+                <span class="line-connect"></span>
+                <span class="endpoint right"></span>
+            </div>
+            <div id="id-card">
+                <div id="profile-id-card">
+                    <p class="text-weak text-start ms-3 my-2">ID CARD</p>
+                    <div class="d-flex justify-content-center">
+                        <div class="id-card-content d-flex justify-content-center">
+                            <div class="id-card-img">
+                                <img src="{{profile.picture}}" alt="profile img">
+                            </div>
+                        </div>
+                        <div class="id-card-content d-flex flex-column justify-content-between">
+                            <span class="text-center">{{profile.name}}</span>
+                            <span class="text-center">{{profile.email}}</span>
+                            {{#githubData}}
+                                <div class="row-complex">
+                                    <div class="row-contr">
+                                        <span class="row-title" style="width:70%;">Repositories</span>
+                                        <span class="row-raw">{{repoCount}}</span>
+                                    </div>
+                                </div>
+                                <div class="row-complex">
+                                    <div class="row-contr">
+                                        <span class="row-title">Commits</span>
+                                        <span class="row-raw">{{commitCount}}</span>
+                                    </div>
+                                    <div class="row-contr">
+                                        <span class="row-title">Issues</span>
+                                        <span class="row-raw">{{issueCount}}</span>
+                                    </div>
+                                </div>
+                                <div class="row-complex">
+                                    <div class="row-contr">
+                                        <span class="row-title">Pull Requests</span>
+                                        <span class="row-raw">{{prCount}}</span>
+                                    </div>
+                                    <div class="row-contr">
+                                        <span class="row-title">Stars</span>
+                                        <span class="row-raw">{{starCount}}</span>
+                                    </div>
+                                </div>
+                                <div class="row-complex">
+                                    <div class="row-contr">
+                                        <span class="row-title">follower</span>
+                                        <span class="row-raw">{{followerCount}}</span>
+                                    </div>
+                                    <div class="row-contr">
+                                        <span class="row-title">following</span>
+                                        <span class="row-raw">{{followingCount}}</span>
+                                    </div>
+                                </div>
+                            {{/githubData}}
+                            {{^githubData}}
+                                <div class="row-complex">
+                                    GitHub 데이터가 설정되지 않았습니다.
+                                </div>
+                            {{/githubData}}
+                        </div>
+                    </div>
+                    <p class="text-weak me-3 my-2 text-end">{{#githubData}}{{end_year}}{{/githubData}} &#9426; SKKU-OSP</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+                <button id="btn-save-id-card" class="btn-id-card pb-active">ID CARD 다운로드</button>
+            </div>
+        </section>
+        <div>
+            <div class="card h-100">
+                <div id="activity" class="card-body">
+                    <div class="card-title d-flex justify-content-between">
+                        커뮤니티 활동
+                        <a href="/profile/{{profile.id}}/activity" target="_blank"><i id="icon-contr" class="bi-box-arrow-up-right evt-icon" title="이동"></i></a>
+                    </div>
+
+                    {{!최근 접속일}}
+                    <div class="card w-100 mb-2">
+                        <div class="card-body">
+                            <span class="card-title">최근 접속일</span>
+                            <div>
+                                {{profile.modifiedDate}}
+                            </div>
+                            <span class="card-title">계정 생성일</span>
+                            <div>
+                                {{profile.createdDate}}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{!쓴 게시글}}
+                    {{#postsCount}}
+                    <div class="card w-100 mb-2">
+                        <div class="card-body">
+                            <span class="card-title">내가 쓴 게시글</span>
+                            <div>
+                                {{postsCount}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/postsCount}}
+
+                    {{!만든 팀}}
+                    {{#teamsCount}}
+                    <div class="card w-100 mb-2">
+                        <div class="card-body">
+                            <span class="card-title">내가 만든 팀</span>
+                            <div>
+                                {{teamsCount}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/teamsCount}}
+
+                    {{!소속 팀}}
+                    {{#teamRelationsCount}}
+                        <div class="card w-100 mb-2">
+                            <div class="card-body">
+                                <span class="card-title">내가 소속된 팀</span>
+                                <div>
+                                    {{teamRelationsCount}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/teamRelationsCount}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+{{>layout/footer}}

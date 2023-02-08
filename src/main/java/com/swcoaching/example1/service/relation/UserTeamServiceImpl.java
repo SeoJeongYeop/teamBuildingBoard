@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Service
 public class UserTeamServiceImpl implements UserTeamService {
@@ -55,5 +58,11 @@ public class UserTeamServiceImpl implements UserTeamService {
         System.out.println("Service findById: id=" + entity.getUser().getId());
 
         return new UserTeamResponseDto(entity);
+    }
+
+    @Override
+    public List<UserTeamResponseDto> findByUserId(Long userId) {
+        return userTeamRepository.findByUserId(userId).stream()
+                .map(UserTeamResponseDto::new).collect(Collectors.toList());
     }
 }

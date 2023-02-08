@@ -26,9 +26,9 @@ public class TeamServiceImpl implements TeamService {
         System.out.println("team service save");
         Team team = requestDto.toEntity();
         team.setStatusNormal();
-        System.out.println("team name="+ team.getName()+" status="+team.getStatus().name());
+        System.out.println("team name=" + team.getName() + " status=" + team.getStatus().name());
         User user = userRepository.getReferenceById(requestDto.getUserId());
-        System.out.println("user id="+ user.getId());
+        System.out.println("user id=" + user.getId());
 
         team.setOwner(user);
 
@@ -58,6 +58,12 @@ public class TeamServiceImpl implements TeamService {
     @Transactional(readOnly = true)
     public List<TeamResponseDto> findAll() {
         return teamRepository.findAll().stream()
+                .map(TeamResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TeamResponseDto> findByUserIdDesc(Long userId) {
+        return teamRepository.findByUserIdDesc(userId).stream()
                 .map(TeamResponseDto::new).collect(Collectors.toList());
     }
 

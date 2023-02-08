@@ -11,4 +11,7 @@ public interface PostsRepository extends JpaRepository<PostsEntity, Long> {
 
     @Query("SELECT p FROM PostsEntity p WHERE p.board.id = ?1 ORDER BY p.id DESC")
     List<PostsEntity> findByBoardId(Long boardId);
+
+    @Query("SELECT p FROM PostsEntity p WHERE p.user.id = ?1 ORDER BY p.id DESC")
+    List<PostsEntity> findByUserIdDesc(Long userId);
 }
