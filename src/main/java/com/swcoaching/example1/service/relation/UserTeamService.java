@@ -11,5 +11,8 @@ public interface UserTeamService {
     Long quitTeam(Long id, UserTeamSaveRequestDto requestDto);
 
     UserTeamResponseDto findById(Long id);
+
     List<UserTeamResponseDto> findByUserId(Long userId);
+
+    List<UserTeamResponseDto> findWaitUserByTeamId(Long ownerTeamId);
 }

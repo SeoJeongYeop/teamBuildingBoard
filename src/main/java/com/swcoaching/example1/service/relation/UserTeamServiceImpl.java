@@ -65,4 +65,10 @@ public class UserTeamServiceImpl implements UserTeamService {
         return userTeamRepository.findByUserId(userId).stream()
                 .map(UserTeamResponseDto::new).collect(Collectors.toList());
     }
+
+    @Override
+    public List<UserTeamResponseDto> findWaitUserByTeamId(Long ownerTeamId) {
+        return userTeamRepository.findByWaitUserByTeamId(ownerTeamId).stream()
+                .map(UserTeamResponseDto::new).collect(Collectors.toList());
+    }
 }
