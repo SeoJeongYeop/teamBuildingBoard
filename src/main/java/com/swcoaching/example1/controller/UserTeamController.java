@@ -1,6 +1,7 @@
 package com.swcoaching.example1.controller;
 
 import com.swcoaching.example1.controller.dto.MessageSaveRequestDto;
+import com.swcoaching.example1.controller.dto.UserTeamIdDto;
 import com.swcoaching.example1.controller.dto.UserTeamResponseDto;
 import com.swcoaching.example1.controller.dto.UserTeamSaveRequestDto;
 import com.swcoaching.example1.service.relation.MessageService;
@@ -22,6 +23,14 @@ public class UserTeamController {
         System.out.println("msgId: " + msgId);
 
         return userTeamService.save(requestDto, msgId);
+    }
+
+    @PostMapping("/api/v1/user-team-relations/approve")
+    public UserTeamResponseDto approve(@RequestBody UserTeamIdDto requestDto) {
+        System.out.println("approve id: " + requestDto.getId());
+        Long id = userTeamService.approveTeam(requestDto.getId());
+
+        return userTeamService.findById(id);
     }
 
     @GetMapping("/api/v1/user-team-relations/{id}")

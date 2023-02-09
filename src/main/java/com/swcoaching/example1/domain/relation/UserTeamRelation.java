@@ -53,7 +53,12 @@ public class UserTeamRelation extends BaseTimeEntity {
     public void waitTeam() {
         this.relationStatus = RelationStatus.WAIT;
     }
-
+    public void approveTeam() {
+        this.relationStatus = RelationStatus.IN;
+    }
+    public void denyTeam() {
+        this.relationStatus = RelationStatus.BLOCK;
+    }
     public void quitTeam() {
         this.relationStatus = RelationStatus.QUIT;
     }
