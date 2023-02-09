@@ -17,6 +17,7 @@
                     <th>팀</th>
                     <th>내용</th>
                     <th>요청 날짜</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody id="tbody">
@@ -26,6 +27,14 @@
                         <td>{{team.name}}</a></td>
                         <td>{{content}}</td>
                         <td>{{createdDate}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-team-approve" data-id="{{relationId}}">
+                                승인
+                            </button>
+                            <button type="button" class="btn btn-danger btn-team-deny" data-id="{{relationId}}">
+                                거절
+                            </button>
+                        </td>
                     </tr>
                 {{/msgs}}
                 </tbody>

@@ -48,6 +48,22 @@ public class UserTeamServiceImpl implements UserTeamService {
     }
 
     @Override
+    public Long approveTeam(Long id) {
+        UserTeamRelation entity = userTeamRepository.findById(id)
+                .orElseThrow(() -> new UserTeamNotFoundException(id));
+        entity.approveTeam();
+        return id;
+    }
+
+    @Override
+    public Long denyTeam(Long id) {
+        UserTeamRelation entity = userTeamRepository.findById(id)
+                .orElseThrow(() -> new UserTeamNotFoundException(id));
+        entity.denyTeam();
+        return id;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public UserTeamResponseDto findById(Long id) {
         System.out.println("UserTeamResponseDto findById: id=" + id);

@@ -14,7 +14,7 @@ public class TeamReqListResDto {
     private final LocalDateTime modifiedDate;
     private final Team team;
     private final User user;
-
+    private final Long relationId;
 
     public TeamReqListResDto(MessageResponseDto msg, UserTeamResponseDto relation) {
         this.id = msg.getId();
@@ -23,5 +23,6 @@ public class TeamReqListResDto {
         this.modifiedDate = msg.getModifiedDate();
         this.user = msg.getUser();
         this.team = relation.getTeam();
+        this.relationId = relation.getId();
     }
 }
