@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @RequiredArgsConstructor
 public class UserTeamResponseDto {
+    private final Long id;
     private final User user;
     private final Team team;
     private final RelationStatus relationStatus;
@@ -19,6 +20,7 @@ public class UserTeamResponseDto {
     private final LocalDateTime modifiedDate;
 
     public UserTeamResponseDto(UserTeamRelation entity) {
+        this.id = entity.getId();
         this.user = entity.getUser();
         this.team = entity.getTeam();
         this.relationStatus = entity.getRelationStatus();

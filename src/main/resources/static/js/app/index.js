@@ -19,6 +19,13 @@ const main = {
         $('#btn-team-apply').on('click', () => {
             _this.applyTeam();
         });
+
+        $('.btn-team-approve').on('click', (e) => {
+            _this.approveTeam(e);
+        });
+        $('.btn-team-deny').on('click', (e) => {
+            _this.denyTeam(e);
+        });
     },
     save: function () {
         let data = {
@@ -190,7 +197,31 @@ const main = {
             alert(JSON.stringify(error));
         });
     },
-
+    approveTeam: function (e) {
+        let targetId = e.target.dataset.id;
+        console.log(targetId);
+        let data = {
+            id: targetId,
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/user-team-relations/approve',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function (data) {
+            alert('승인했습니다.');
+            $(`.btn-danger[data-id="${data.id}"]`).remove();
+            let approveBtn = $(`.btn-primary[data-id="${data.id}"]`);
+            approveBtn.attr('disabled', true);
+            approveBtn.attr('class', 'btn btn-outline-primary');
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    denyTeam: function (e) {
+        console.log(e.target['data-id']);
+    },
 };
 
 main.init();
@@ -225,5 +256,43 @@ $().ready(function () {
             $(this).removeClass('bi-chevron-up');
             $(target).addClass('none');
         }
+    });
+    // id 카드 다운로드
+    const cssDecl = getComputedStyle(document.documentElement);
+    $("#btn-save-id-card").on("click", () => {
+        const screenshotTarget = document.getElementById("id-card");
+        const idCard = document.getElementById("profile-id-card");
+        idCard.style.position = "relative";
+        idCard.style.zIndex = "1057";
+        let shadow_ele = Array(6);
+        for (let i = 0; i < 6; i++) {
+            shadow_ele[i] = document.createElement("div");
+            shadow_ele[i].style.display = "block";
+            shadow_ele[i].style.width = idCard.getBoundingClientRect().width + 2 - i + "px";
+            shadow_ele[i].style.height = idCard.getBoundingClientRect().height - i + "px";
+            shadow_ele[i].style.backgroundColor = '#0000000d';
+            shadow_ele[i].style.position = "absolute";
+            shadow_ele[i].style.borderRadius = "15px";
+            shadow_ele[i].style.top = "16px";
+            shadow_ele[i].style.left = 4 + 0.5 * i + "px";
+            shadow_ele[i].style.zIndex = "1056";
+            screenshotTarget.appendChild(shadow_ele[i]);
+        }
+
+        html2canvas(screenshotTarget,
+            {scale: 2, backgroundColor: cssDecl.getPropertyValue('--developer-bg-color')})
+            .then((canvas) => {
+                canvas.getContext('2d').filter = 'blur(4px)';
+                const base64image = canvas.toDataURL("image/png");
+                let anchor = document.createElement('a');
+                anchor.setAttribute("href", base64image);
+                anchor.setAttribute("download", "my-image.png");
+                anchor.click();
+                anchor.remove();
+            });
+        idCard.removeAttribute("style");
+        shadow_ele.forEach((shadow) => {
+            shadow.remove();
+        });
     });
 });

@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -37,5 +40,11 @@ public class MessageServiceImpl implements MessageService {
         System.out.println("MsgService findById: content=" + entity.getContent());
 
         return new MessageResponseDto(entity);
+    }
+
+    @Override
+    public List<MessageResponseDto> findByUserId(Long targetUserId) {
+        return msgRepository.findByUserId(targetUserId).stream()
+                .map(MessageResponseDto::new).collect(Collectors.toList());
     }
 }

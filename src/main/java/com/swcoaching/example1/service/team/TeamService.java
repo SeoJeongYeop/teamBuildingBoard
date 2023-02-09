@@ -16,5 +16,7 @@ public interface TeamService {
 
     List<TeamResponseDto> findAll();
 
+    List<TeamResponseDto> findByUserIdDesc(Long userId);
+
     TeamResponseDto findByName(String teamName);
 }

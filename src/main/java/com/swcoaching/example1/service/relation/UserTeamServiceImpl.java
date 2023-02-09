@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Service
 public class UserTeamServiceImpl implements UserTeamService {
@@ -45,6 +48,22 @@ public class UserTeamServiceImpl implements UserTeamService {
     }
 
     @Override
+    public Long approveTeam(Long id) {
+        UserTeamRelation entity = userTeamRepository.findById(id)
+                .orElseThrow(() -> new UserTeamNotFoundException(id));
+        entity.approveTeam();
+        return id;
+    }
+
+    @Override
+    public Long denyTeam(Long id) {
+        UserTeamRelation entity = userTeamRepository.findById(id)
+                .orElseThrow(() -> new UserTeamNotFoundException(id));
+        entity.denyTeam();
+        return id;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public UserTeamResponseDto findById(Long id) {
         System.out.println("UserTeamResponseDto findById: id=" + id);
@@ -55,5 +74,17 @@ public class UserTeamServiceImpl implements UserTeamService {
         System.out.println("Service findById: id=" + entity.getUser().getId());
 
         return new UserTeamResponseDto(entity);
+    }
+
+    @Override
+    public List<UserTeamResponseDto> findByUserId(Long userId) {
+        return userTeamRepository.findByUserId(userId).stream()
+                .map(UserTeamResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserTeamResponseDto> findWaitUserByTeamId(Long ownerTeamId) {
+        return userTeamRepository.findByWaitUserByTeamId(ownerTeamId).stream()
+                .map(UserTeamResponseDto::new).collect(Collectors.toList());
     }
 }

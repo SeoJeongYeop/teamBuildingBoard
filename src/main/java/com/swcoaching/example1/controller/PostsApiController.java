@@ -4,11 +4,12 @@ import com.swcoaching.example1.controller.dto.PostsResponseDto;
 import com.swcoaching.example1.controller.dto.PostsSaveRequestDto;
 import com.swcoaching.example1.controller.dto.PostsUpdateRequestDto;
 import com.swcoaching.example1.service.posts.PostsService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RestController
+@RequestMapping
 public class PostsApiController {
     private final PostsService postsService;
 

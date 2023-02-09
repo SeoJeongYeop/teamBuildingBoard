@@ -3,30 +3,32 @@
     <title>Spring Boot Web Service</title>
     <meta http-equiv="Content-Type" charset="UTF-8" name="viewport" content="width=device-width"/>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" type="text/css" href="/css/app/color.css">
     <link rel="stylesheet" type="text/css" href="/css/app/base.css">
     <link rel="stylesheet" type="text/css" href="/css/app/community.css">
+    <link rel="stylesheet" type="text/css" href="/css/app/profile.css">
 
     <!-- SLIM SELECT -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.4.2/slimselect.min.js" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.4.2/slimselect.css" rel="stylesheet">
-
 </head>
 <body>
-    <header id="main-navbar" class="navbar navbar-expand-lg navbar-light d-flex flex-row px-5">
-        <a class="navbar-brand fs-4 bold" href="/">
-            스프링 부트 팀 빌딩 게시판
-        </a>
-        <div id="navbarContent">
-            <ul class="navbar-nav me-auto flex-row gap-3">
+<header id="main-navbar" class="navbar navbar-expand-lg navbar-light d-flex flex-row justify-content-between px-5">
+<div class="navbar navbar-expand-lg navbar-light d-flex flex-row">
+    <a class="navbar-brand fs-4 bold" href="/">
+        스프링 부트 팀 빌딩 게시판
+    </a>
+    <div id="navbarContent">
+        <ul class="navbar-nav me-auto flex-row gap-3">
             {{#userName}}
                 <li class="nav-item">
-                    <span class="nav-link">
-                        {{userName}}
-                        <a href="/logout"><i class="bi bi-box-arrow-right"></i></a>
-                    </span>
+                        <span class="nav-link">
+                            {{userName}}
+                            <a href="/logout"><i class="bi bi-box-arrow-right"></i></a>
+                        </span>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/profile/{{userName}}">프로필</a>
@@ -37,14 +39,27 @@
                     <a class="nav-link" href="/oauth2/authorization/google">Google Login</a>
                 </li>
             {{/userName}}
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/community">게시판 둘러보기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/teams">팀 둘러보기</a>
-                </li>
-            </ul>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/community">게시판 둘러보기</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/teams">팀 둘러보기</a>
+            </li>
+        </ul>
+    </div>
+    {{#userName}}
+    </div>
+        <div class="d-flex flex-row p-2">
+            {{!지원서}}
+            <div id="team-apply-list" class="position-relative pointer">
+                <a href="/teams/requests" class="default-btn p-0">
+                    <i class="bi bi-envelope"></i>
+                </a>
+            </div>
         </div>
-    </header>
-    <div class="body-wrapper">
-        <div class="container my-4">
+    {{/userName}}
+</header>
+<!--    <div id="ApplyTeamModal" class="modal modal-lg fade">-->
+<!--    </div>-->
+<div class="body-wrapper">
+    <div class="container my-4">

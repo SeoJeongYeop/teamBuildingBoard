@@ -2,8 +2,13 @@ package com.swcoaching.example1.controller.web;
 
 import com.swcoaching.example1.config.auth.LoginUser;
 import com.swcoaching.example1.config.auth.dto.SessionUser;
+import com.swcoaching.example1.controller.dto.MessageResponseDto;
+import com.swcoaching.example1.controller.dto.TeamReqListResDto;
 import com.swcoaching.example1.controller.dto.TeamResponseDto;
+import com.swcoaching.example1.controller.dto.UserTeamResponseDto;
 import com.swcoaching.example1.service.board.BoardService;
+import com.swcoaching.example1.service.relation.MessageService;
+import com.swcoaching.example1.service.relation.UserTeamService;
 import com.swcoaching.example1.service.team.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,12 +16,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class TeamManageController {
     private final TeamService teamService;
-
     private final BoardService boardService;
+    private final UserTeamService userTeamService;
+    private final MessageService messageService;
 
     @GetMapping("/teams")
     public String teamList(Model model, @LoginUser SessionUser user) {
@@ -60,6 +69,48 @@ public class TeamManageController {
 
     @GetMapping("/teams/application/{teamId}")
     public String teamApplication(@PathVariable Long teamId, Model model, @LoginUser SessionUser user) {
+        TeamResponseDto dto = teamService.findById(teamId);
+        model.addAttribute("boards", boardService.findAll());
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userId", user.getId());
+            model.addAttribute("userPicture", user.getPicture());
+        }
+        model.addAttribute("team", dto);
+
+        return "team-application";
+    }
+
+    @GetMapping("/teams/requests")
+    public String teamRequestsList(Model model, @LoginUser SessionUser user) {
+        List<TeamResponseDto> teamList = teamService.findByUserIdDesc(user.getId());
+
+        List<TeamReqListResDto> result = new ArrayList<>();
+        for (TeamResponseDto teamResDto : teamList) {
+            Long ownerTeamId = teamResDto.getId();
+            List<UserTeamResponseDto> relationDtoList = userTeamService.findWaitUserByTeamId(ownerTeamId);
+            for (UserTeamResponseDto userTeamResDto : relationDtoList) {
+                Long targetUserId = userTeamResDto.getUser().getId();
+                List<MessageResponseDto> msgList = messageService.findByUserId(targetUserId);
+                for (MessageResponseDto messageResDto : msgList) {
+                    result.add(new TeamReqListResDto(messageResDto, userTeamResDto));
+                }
+            }
+        }
+        model.addAttribute("msgs", result);
+        model.addAttribute("hasMsgs", result.size() != 0);
+        model.addAttribute("boards", boardService.findAll());
+
+        model.addAttribute("userName", user.getName());
+        model.addAttribute("userId", user.getId());
+        model.addAttribute("userPicture", user.getPicture());
+
+        return "team-request";
+    }
+
+    @GetMapping("/teams/requests/{teamId}")
+    public String teamRequest(@PathVariable Long teamId, Model model, @LoginUser SessionUser user) {
         TeamResponseDto dto = teamService.findById(teamId);
         model.addAttribute("boards", boardService.findAll());
 
