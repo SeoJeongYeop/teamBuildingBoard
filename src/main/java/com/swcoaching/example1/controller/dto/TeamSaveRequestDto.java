@@ -13,10 +13,10 @@ public class TeamSaveRequestDto {
     private String description;
     private String picture;
     private Status status;
-    private long userId;
+    private Long userId;
 
     @Builder
-    public TeamSaveRequestDto(String name, String description, String picture, long userId) {
+    public TeamSaveRequestDto(String name, String description, String picture, Long userId) {
         this.name = name;
         this.description = description;
         this.picture = picture;

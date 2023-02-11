@@ -11,11 +11,11 @@ public class PostsSaveRequestDto {
     private String title;
     private String content;
     private String author;
-    private long boardId;
-    private long userId;
+    private Long boardId;
+    private Long userId;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author, long boardId, long userId) {
+    public PostsSaveRequestDto(String title, String content, String author, Long boardId, Long userId) {
         this.title = title;
         this.content = content;
         this.author = author;
