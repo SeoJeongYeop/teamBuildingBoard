@@ -19,7 +19,6 @@ const main = {
         $('#btn-team-apply').on('click', () => {
             _this.applyTeam();
         });
-
         $('.btn-team-approve').on('click', (e) => {
             _this.approveTeam(e);
         });
@@ -220,7 +219,26 @@ const main = {
         });
     },
     denyTeam: function (e) {
-        console.log(e.target['data-id']);
+        let targetId = e.target.dataset.id;
+        console.log(targetId);
+        let data = {
+            id: targetId,
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/user-team-relations/deny',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function (data) {
+            alert('거절했습니다.');
+            $(`.btn-primary[data-id="${data.id}"]`).remove();
+            let denyBtn = $(`.btn-danger[data-id="${data.id}"]`);
+            denyBtn.attr('disabled', true);
+            denyBtn.attr('class', 'btn btn-outline-danger');
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     },
 };
 

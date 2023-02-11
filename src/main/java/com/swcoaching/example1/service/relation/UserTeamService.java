@@ -9,7 +9,9 @@ public interface UserTeamService {
     Long save(UserTeamSaveRequestDto requestDto, Long msgId);
 
     Long quitTeam(Long id, UserTeamSaveRequestDto requestDto);
+
     Long approveTeam(Long id);
+
     Long denyTeam(Long id);
 
     UserTeamResponseDto findById(Long id);
