@@ -24,7 +24,6 @@ import java.util.List;
 public class ProfileController {
     private final UserService userService;
     private final BoardService boardService;
-
     private final PostsService postsService;
     private final TeamService teamService;
     private final UserTeamService userTeamService;
@@ -33,19 +32,19 @@ public class ProfileController {
     public String profile(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         UserResponseDto dto = userService.findById(id);
 
-        if(dto != null) {
+        if (dto != null) {
             model.addAttribute("boards", boardService.findAll());
 
             List<PostsListResponseDto> postResDto = postsService.findByUserIdDesc(id);
-            model.addAttribute("postsCount", (postResDto != null) ? postResDto.size() : 0 );
+            model.addAttribute("postsCount", (postResDto != null) ? postResDto.size() : 0);
             model.addAttribute("posts", postResDto);
 
             List<TeamResponseDto> teamResDto = teamService.findByUserIdDesc(id);
-            model.addAttribute("teamsCount", (teamResDto != null) ? teamResDto.size() : 0 );
+            model.addAttribute("teamsCount", (teamResDto != null) ? teamResDto.size() : 0);
             model.addAttribute("teams", teamResDto);
 
             List<UserTeamResponseDto> userTeamResDto = userTeamService.findByUserId(id);
-            model.addAttribute("teamRelationsCount", (userTeamResDto != null) ? userTeamResDto.size() : 0 );
+            model.addAttribute("teamRelationsCount", (userTeamResDto != null) ? userTeamResDto.size() : 0);
             model.addAttribute("teamRelations", userTeamResDto);
             model.addAttribute("profile", dto);
 

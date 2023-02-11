@@ -109,6 +109,12 @@ public class TeamManageController {
         return "team-request";
     }
 
+    // 공통으로 안가져가게 공통으로 api로 할수있도록
+    // 2. 캐시하는 방법
+    // 3. 아규먼트 리졸브 계속읽어오는것
+    // 4. 사용은 잘 안하는데 세션에 넣는 방법
+
+
     @GetMapping("/teams/requests/{teamId}")
     public String teamRequest(@PathVariable Long teamId, Model model, @LoginUser SessionUser user) {
         TeamResponseDto dto = teamService.findById(teamId);

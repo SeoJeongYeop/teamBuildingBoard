@@ -87,7 +87,7 @@ public class IndexController {
 
         return "post";
     }
-
+    // 모델 애트리뷰트
     @GetMapping("/community/posts/save")
     public String postsSave(@RequestParam(value = "id", required = false) Long id, Model model, @LoginUser SessionUser user) {
         model.addAttribute("boards", boardService.findAll());

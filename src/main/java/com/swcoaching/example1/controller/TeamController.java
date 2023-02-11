@@ -8,6 +8,7 @@ import com.swcoaching.example1.controller.dto.UserTeamSaveRequestDto;
 import com.swcoaching.example1.domain.relation.RelationStatus;
 import com.swcoaching.example1.service.relation.UserTeamService;
 import com.swcoaching.example1.service.team.TeamService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class TeamController {
     }
 
     @PostMapping("/api/v1/teams")
-    public Long save(@RequestBody TeamSaveRequestDto requestDto) {
+    public Long save(@Valid @RequestBody TeamSaveRequestDto requestDto) {
         Long teamId = teamService.save(requestDto);
         UserTeamSaveRequestDto entity = new UserTeamSaveRequestDto(requestDto.getUserId(), teamId, RelationStatus.IN, null);
         Long relationId = userTeamService.save(entity, null);
@@ -38,7 +39,7 @@ public class TeamController {
     }
 
     @PutMapping("/api/v1/teams/{id}")
-    public Long update(@PathVariable Long id, @RequestBody TeamUpdateRequestDto requestDto) {
+    public Long update(@PathVariable Long id, @Valid @RequestBody TeamUpdateRequestDto requestDto) {
         System.out.println("team update: " + id);
         return teamService.update(id, requestDto);
     }

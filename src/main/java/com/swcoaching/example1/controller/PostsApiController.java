@@ -4,6 +4,7 @@ import com.swcoaching.example1.controller.dto.PostsResponseDto;
 import com.swcoaching.example1.controller.dto.PostsSaveRequestDto;
 import com.swcoaching.example1.controller.dto.PostsUpdateRequestDto;
 import com.swcoaching.example1.service.posts.PostsService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +15,12 @@ public class PostsApiController {
     private final PostsService postsService;
 
     @PostMapping("/api/v1/posts")
-    public Long save(@RequestBody PostsSaveRequestDto requestDto) {
+    public Long save(@Valid @RequestBody PostsSaveRequestDto requestDto) {
         return postsService.save(requestDto);
     }
 
     @PutMapping("/api/v1/posts/{id}")
-    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
+    public Long update(@PathVariable Long id, @Valid @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(id, requestDto);
     }
 
