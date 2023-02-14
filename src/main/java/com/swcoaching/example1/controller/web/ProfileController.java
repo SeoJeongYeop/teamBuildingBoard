@@ -52,6 +52,11 @@ public class ProfileController {
             model.addAttribute("teamRelationsCount", (userTeamResDto != null) ? userTeamResDto.size() : 0);
             model.addAttribute("teamRelations", userTeamResDto);
 
+            GithubResponseDto githubResponseDto = githubDataService.findByUserId(id);
+            if(githubResponseDto != null)
+                model.addAttribute("githubData", githubResponseDto);
+
+
             String image = dto.getImage();
             if (image == null) {
                 try {
@@ -84,6 +89,9 @@ public class ProfileController {
 
         return "profile-github";
     }
+
+
+
 
     private Model setUserModel(Model model, SessionUser user) {
         if (user == null) return model;
