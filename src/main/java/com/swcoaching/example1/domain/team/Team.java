@@ -32,6 +32,10 @@ public class Team extends BaseTimeEntity {
     @JoinColumn(name = "userId")
     private User owner;
 
+    @Lob
+    @Column(length = 100000)
+    private String image;
+
     @Builder
     public Team(String name, String description, String picture, Status status) {
         this.name = name;
@@ -45,6 +49,10 @@ public class Team extends BaseTimeEntity {
         this.description = description;
         if (picture != null)
             this.picture = picture;
+    }
+
+    public void setImage(String imageBase) {
+        this.image = imageBase;
     }
 
     public void setOwner(User owner) {

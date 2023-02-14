@@ -18,6 +18,7 @@ public class TeamResponseDto {
     private final String createdDate;
     private final String modifiedDate;
     private boolean isOwner;
+    private final String image;
 
     public TeamResponseDto(Team entity) {
         this.id = entity.getId();
@@ -29,6 +30,7 @@ public class TeamResponseDto {
         this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.modifiedDate = entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.isOwner = false;
+        this.image = entity.getImage();
     }
 
     public boolean isOwner() {
