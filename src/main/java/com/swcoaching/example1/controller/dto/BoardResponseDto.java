@@ -4,6 +4,7 @@ import com.swcoaching.example1.domain.board.BoardEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
@@ -21,7 +22,12 @@ public class BoardResponseDto {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.remark = entity.getRemark();
-        this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        this.modifiedDate = entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.createdDate = applyDateTimePattern(entity.getCreatedDate());
+        this.modifiedDate = applyDateTimePattern(entity.getModifiedDate());
+    }
+
+    private String applyDateTimePattern(LocalDateTime t) {
+        if (t != null) return t.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return null;
     }
 }

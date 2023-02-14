@@ -5,6 +5,7 @@ import com.swcoaching.example1.domain.team.Team;
 import com.swcoaching.example1.domain.user.User;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
@@ -27,14 +28,19 @@ public class TeamResponseDto {
         this.picture = entity.getPicture();
         this.status = entity.getStatus();
         this.owner = entity.getOwner();
-        this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        this.modifiedDate = entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.createdDate = applyDateTimePattern(entity.getCreatedDate());
+        this.modifiedDate = applyDateTimePattern(entity.getModifiedDate());
         this.isOwner = false;
         this.image = entity.getImage();
     }
 
     public boolean isOwner() {
         return this.isOwner;
+    }
+
+    private String applyDateTimePattern(LocalDateTime t) {
+        if (t != null) return t.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return null;
     }
 
     public void checkOwner(Long userId) {

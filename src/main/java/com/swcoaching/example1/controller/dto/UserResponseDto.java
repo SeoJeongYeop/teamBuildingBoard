@@ -4,6 +4,7 @@ import com.swcoaching.example1.domain.user.Role;
 import com.swcoaching.example1.domain.user.User;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
@@ -23,9 +24,14 @@ public class UserResponseDto {
         this.email = entity.getEmail();
         this.picture = entity.getPicture();
         this.role = entity.getRole();
-        this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        this.modifiedDate = entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.createdDate = applyDateTimePattern(entity.getCreatedDate());
+        this.modifiedDate = applyDateTimePattern(entity.getModifiedDate());
         this.image = entity.getImage();
+    }
+
+    private String applyDateTimePattern(LocalDateTime t) {
+        if (t != null) return t.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return null;
     }
 
     public void setImage(String imageBase) {

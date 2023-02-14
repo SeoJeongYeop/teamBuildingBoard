@@ -5,6 +5,7 @@ import com.swcoaching.example1.domain.posts.PostsEntity;
 import com.swcoaching.example1.domain.user.User;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
@@ -22,8 +23,13 @@ public class PostsListResponseDto {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.author = entity.getAuthor();
-        this.modifiedDate = entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.modifiedDate = applyDateTimePattern(entity.getModifiedDate());
         this.board = entity.getBoard();
         this.user = entity.getUser();
+    }
+
+    private String applyDateTimePattern(LocalDateTime t) {
+        if (t != null) return t.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return null;
     }
 }
