@@ -60,7 +60,8 @@ public class UploadFileServiceImpl implements UploadFileService {
         long fileSize = file.getSize();
         logger.info("user fileSize: " + fileSize);
         User user = userRepository.getReferenceById(userId);
-        user.setImage(file.getBytes());
+        String imageBase = Base64.getEncoder().encodeToString(file.getBytes());
+        user.setImage(imageBase);
 
         return user.getName();
     }

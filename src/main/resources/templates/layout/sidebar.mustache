@@ -2,7 +2,12 @@
     <div id="profile-tab" class="w-100">
         {{#userPicture}}
         <div id="sidebar-user-info">
-            <img width="42px" height="42px" src="{{userPicture}}" class="profile-img" alt="profile-image">
+            {{#userImage}}
+                <img width="42px" height="42px" src="data:image/jpg;base64,{{userImage}}" class="profile-img" alt="profile-image">
+            {{/userImage}}
+            {{^userImage}}
+                <img width="42px" height="42px" src="{{userPicture}}" class="profile-img" alt="profile-image">
+            {{/userImage}}
             <a href="/profile/{{userId}}">
                 <span id="profile-username">{{userName}}</span>
             </a>

@@ -38,4 +38,11 @@ public class UserServiceImpl implements UserService {
 
         return new UserResponseDto(entity);
     }
+
+    @Override
+    public void setUserImage(Long id, String imageBase) {
+        User entity = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        entity.setImage(imageBase);
+    }
 }

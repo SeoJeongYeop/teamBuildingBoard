@@ -15,6 +15,7 @@ public class UserResponseDto {
     private final Role role;
     private final String createdDate;
     private final String modifiedDate;
+    private String image;
 
     public UserResponseDto(User entity) {
         this.id = entity.getId();
@@ -24,5 +25,10 @@ public class UserResponseDto {
         this.role = entity.getRole();
         this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.modifiedDate = entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.image = entity.getImage();
+    }
+
+    public void setImage(String imageBase) {
+        this.image = imageBase;
     }
 }

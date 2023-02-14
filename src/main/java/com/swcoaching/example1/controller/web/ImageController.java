@@ -73,7 +73,7 @@ public class ImageController {
         logger.info("image user id=" + userId);
         UserResponseDto dto = userService.findById(userId);
 
-        byte[] result = dto.getImage();
+        byte[] result = Base64.getDecoder().decode(dto.getImage());
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_PNG)
                 .body(result);
