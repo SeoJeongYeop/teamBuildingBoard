@@ -1,25 +1,29 @@
 <div class="col-md-3" id="community-sidebar">
     <div id="profile-tab" class="w-100">
         {{#userPicture}}
-        <div id="sidebar-user-info">
-            {{#userImage}}
-                <img width="42px" height="42px" src="data:image/jpg;base64,{{userImage}}" class="profile-img" alt="profile-image">
-            {{/userImage}}
-            {{^userImage}}
-                <img width="42px" height="42px" src="{{userPicture}}" class="profile-img" alt="profile-image">
-            {{/userImage}}
-            <a href="/profile/{{userId}}">
-                <span id="profile-username">{{userName}}</span>
-            </a>
-        </div>
+            <div id="sidebar-user-info">
+                {{#userImage}}
+                    <img width="42px" height="42px" src="data:image/jpg;base64,{{userImage}}" class="profile-img"
+                         alt="profile-image">
+                {{/userImage}}
+                {{^userImage}}
+                    <img width="42px" height="42px" src="{{userPicture}}" class="profile-img" alt="profile-image">
+                {{/userImage}}
+                <a href="/profile/{{userId}}">
+                    <span id="profile-username">{{userName}}</span>
+                </a>
+            </div>
         {{/userPicture}}
         {{^userPicture}}
-        <div id="sidebar-user-info">
-            <img width="42px" height="42px" src="https://loremflickr.com/100/100" class="profile-img" alt="default-profile-image">
-            <a href="/oauth2/authorization/google">
-                <span id="profile-username">Google LogIn</span>
-            </a>
-        </div>
+            <div id="sidebar-user-info">
+                {{#defaultImage}}
+                    <img width="42px" height="42px" src="data:image/jpg;base64,{{defaultImage}}" class="profile-img"
+                         alt="default profile image">
+                {{/defaultImage}}
+                <a href="/oauth2/authorization/google">
+                    <span id="profile-username">Google LogIn</span>
+                </a>
+            </div>
         {{/userPicture}}
     </div>
     <div id="community-tab" class="w-100">
@@ -31,12 +35,12 @@
             <i class="bi bi-chevron-up folder hover-opacity" data-fold-target=".link-board"></i>
         </div>
         {{#boards}}
-        <div class="boardgroup-item link-board hover-opacity">
-            <a href="/community/boards/{{id}}" class="sidebar-link">
-                <i class="bi bi-file-text-fill fa-lg"></i>
-                <span>{{title}}</span>
-            </a>
-        </div>
+            <div class="boardgroup-item link-board hover-opacity">
+                <a href="/community/boards/{{id}}" class="sidebar-link">
+                    <i class="bi bi-file-text-fill fa-lg"></i>
+                    <span>{{title}}</span>
+                </a>
+            </div>
         {{/boards}}
     </div>
 </div>

@@ -62,7 +62,6 @@
 
 span.row-raw {
     font-size: 14px;
-    width: calc(50% - 68px);
     margin-right: 0.5rem;
 }
 
@@ -71,8 +70,11 @@ span.row-raw {
     color: white;
 }
 
-.btn-id-card {
+.card-margin {
     margin: 0 4% 4%;
+}
+
+.btn-id-card {
     padding: 10px 20px;
     text-align: center;
     box-shadow: 0 2px 4px var(--main-box-shadow);
