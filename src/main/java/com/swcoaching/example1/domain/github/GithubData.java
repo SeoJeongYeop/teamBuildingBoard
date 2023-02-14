@@ -1,25 +1,37 @@
 package com.swcoaching.example1.domain.github;
 
+import com.swcoaching.example1.domain.BaseTimeEntity;
+import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-public class GithubData {
-    private final Long id;
-    private final String githubId;
-    private final int year;
-    private final int starCount;
-    private final int commitCount;
-    private final int prCount;
-    private final int issueCount;
-    private final int followerCount;
-    private final int followingCount;
-    private final int repoCount;
 
+@Getter
+@NoArgsConstructor
+@Table(name = "github_data")
+@Entity
+public class GithubData extends BaseTimeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String githubUsername;
+    @Column(name = "date_year")
+    private int year;
+    private int starCount;
+    private int commitCount;
+    private int prCount;
+    private int issueCount;
+    private int followerCount;
+    private int followingCount;
+    private int repoCount;
+    private Long userId;
 
     @Builder
-    public GithubData(Long id, String githubId, int year, int starCount, int commitCount, int prCount,
+    public GithubData(Long id, String githubUsername, int year, int starCount, int commitCount, int prCount,
                       int issueCount, int followerCount, int followingCount, int repoCount) {
         this.id = id;
-        this.githubId = githubId;
+        this.githubUsername = githubUsername;
         this.year = year;
         this.starCount = starCount;
         this.commitCount = commitCount;
@@ -30,56 +42,7 @@ public class GithubData {
         this.repoCount = repoCount;
     }
 
-    public static GithubData of(GithubDataEntity githubDataEntity) {
-        return new GithubData(githubDataEntity.getId(),
-                githubDataEntity.getGithubId(),
-                githubDataEntity.getYear(),
-                githubDataEntity.getStarCount(),
-                githubDataEntity.getCommitCount(),
-                githubDataEntity.getPrCount(),
-                githubDataEntity.getIssueCount(),
-                githubDataEntity.getFollowerCount(),
-                githubDataEntity.getFollowingCount(),
-                githubDataEntity.getRepoCount());
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getGithubId() {
-        return githubId;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int getStarCount() {
-        return starCount;
-    }
-
-    public int getCommitCount() {
-        return commitCount;
-    }
-
-    public int getPrCount() {
-        return prCount;
-    }
-
-    public int getIssueCount() {
-        return issueCount;
-    }
-
-    public int getFollowerCount() {
-        return followerCount;
-    }
-
-    public int getFollowingCount() {
-        return followingCount;
-    }
-
-    public int getRepoCount() {
-        return repoCount;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

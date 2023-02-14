@@ -1,0 +1,27 @@
+{{>layout/header}}
+<div id="main-container" class="row">
+    {{>layout/sidebar}}
+    <div id="main-content" class="col-md-9">
+        <div id="board-title-bar" class="d-flex justify-content-between">
+            <div id="board-title">
+                Github 연결
+            </div>
+        </div>
+        <form enctype="multipart/form-data">
+            <div class="form-group mb-2">
+                <label for="name">유저 이름</label>
+                <input type="text" id="name" class="form-control" value="{{userName}}" readonly>
+                <input type="hidden" id="id" class="form-control" value="{{userId}}">
+            </div>
+            <div class="form-group mb-2">
+                <label for="github-id">Github Username</label>
+                <input id="github-id" class="form-control" placeholder="연결할 Username을 입력하세요">
+            </div>
+        </form>
+        <div class="d-flex justify-content-end my-3 gap-2">
+            <a href="/" role="button" class="btn btn-secondary">취소</a>
+            <button type="button" id="btn-github-save" class="btn btn-primary">등록</button>
+        </div>
+    </div>
+</div>
+{{>layout/footer}}

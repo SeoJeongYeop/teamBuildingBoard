@@ -2,11 +2,9 @@ package com.swcoaching.example1.controller.web;
 
 import com.swcoaching.example1.config.auth.LoginUser;
 import com.swcoaching.example1.config.auth.dto.SessionUser;
-import com.swcoaching.example1.controller.dto.PostsListResponseDto;
-import com.swcoaching.example1.controller.dto.TeamResponseDto;
-import com.swcoaching.example1.controller.dto.UserResponseDto;
-import com.swcoaching.example1.controller.dto.UserTeamResponseDto;
+import com.swcoaching.example1.controller.dto.*;
 import com.swcoaching.example1.service.board.BoardService;
+import com.swcoaching.example1.service.github.GithubDataService;
 import com.swcoaching.example1.service.posts.PostsService;
 import com.swcoaching.example1.service.relation.UserTeamService;
 import com.swcoaching.example1.service.team.TeamService;
@@ -33,6 +31,7 @@ public class ProfileController {
     private final PostsService postsService;
     private final TeamService teamService;
     private final UserTeamService userTeamService;
+    private final GithubDataService githubDataService;
 
     @GetMapping("/profile/{id}")
     public String profile(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
@@ -72,6 +71,18 @@ public class ProfileController {
         }
 
         return "profile";
+    }
+
+    @GetMapping("/profile/{id}/github")
+    public String profileGithub(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+        UserResponseDto dto = userService.findById(id);
+
+        if (dto != null) {
+            model.addAttribute("boards", boardService.findAll());
+            setUserModel(model, user);
+        }
+
+        return "profile-github";
     }
 
     private Model setUserModel(Model model, SessionUser user) {

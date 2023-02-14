@@ -1,7 +1,6 @@
 package com.swcoaching.example1.github;
 
 import com.swcoaching.example1.domain.github.GithubData;
-import com.swcoaching.example1.domain.github.GithubDataEntity;
 import com.swcoaching.example1.domain.github.GithubDataRepository;
 import com.swcoaching.example1.service.github.GithubDataService;
 import com.swcoaching.example1.service.github.GithubDataServiceImpl;
@@ -21,11 +20,11 @@ class GithubDataServiceTest {
     @Test
     void findByGithubId() {
         // given
-        GithubDataEntity githubDataEntity = mock(GithubDataEntity.class);
+        GithubData githubDataEntity = mock(GithubData.class);
         GithubDataRepository githubDataRepository = mock(GithubDataRepository.class);
 
         long testGithubDataId = 1L;
-        String testGithubId = "SeoJeongYeop";
+        String testGithubUsername = "SeoJeongYeop";
         int testYear = 2023;
         int testStarCount = 1;
         int testCommitCount = 100;
@@ -36,7 +35,7 @@ class GithubDataServiceTest {
         int testRepoCount = 10;
 
         when(githubDataEntity.getId()).thenReturn(testGithubDataId);
-        when(githubDataEntity.getGithubId()).thenReturn(testGithubId);
+        when(githubDataEntity.getGithubUsername()).thenReturn(testGithubUsername);
         when(githubDataEntity.getYear()).thenReturn(testYear);
         when(githubDataEntity.getStarCount()).thenReturn(testStarCount);
         when(githubDataEntity.getCommitCount()).thenReturn(testCommitCount);
@@ -46,16 +45,17 @@ class GithubDataServiceTest {
         when(githubDataEntity.getFollowingCount()).thenReturn(testFollowingCount);
         when(githubDataEntity.getRepoCount()).thenReturn(testRepoCount);
 
-        when(githubDataRepository.findByGithubId(testGithubId)).thenReturn(githubDataEntity);
+        when(githubDataRepository.findByGithubUsername(testGithubUsername))
+                .thenReturn(githubDataEntity);
 
 
         // when
         GithubDataService githubDataService = new GithubDataServiceImpl(githubDataRepository);
-        GithubData githubData = githubDataService.findByGithubId(testGithubId);
+        GithubData githubData = githubDataService.findByGithubUsername(testGithubUsername);
 
         // then
         assertEquals(githubData.getId(), testGithubDataId);
-        assertEquals(githubData.getGithubId(), testGithubId);
+        assertEquals(githubData.getGithubUsername(), testGithubUsername);
         assertEquals(githubData.getYear(), testYear);
         assertEquals(githubData.getStarCount(), testStarCount);
         assertEquals(githubData.getCommitCount(), testCommitCount);

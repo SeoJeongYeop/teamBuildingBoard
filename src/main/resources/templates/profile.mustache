@@ -71,6 +71,11 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end gap-2">
+                {{^githubData}}
+                    <a href="/profile/{{userId}}/github" id="btn-github" class="btn-id-card pb-active" role="button">
+                        GitHub 연결하기
+                    </a>
+                {{/githubData}}
                 <button id="btn-save-id-card" class="btn-id-card pb-active">ID CARD 다운로드</button>
             </div>
         </section>

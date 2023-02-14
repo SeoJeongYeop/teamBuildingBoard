@@ -36,9 +36,12 @@ VALUES ('2023 SW코칭 프로그램 - 스프링프레임워크', 'NORMAL', '스�
         (SELECT id FROM app_user WHERE email = 'sample1@gmail.com'));
 
 --TRUNCATE TABLE github_data;
-INSERT INTO github_data (commit_count, follower_count, following_count, github_id,
+INSERT INTO github_data (commit_count, follower_count, following_count, github_username,
                          issue_count, pr_count, repo_count, star_count, date_year)
-VALUES (100, 1, 1, 'SeoJeongYeop', 10, 1, 10, 1, 2023);
+VALUES (100, 1, 1, 'SeoJeongYeop', 10, 1, 10, 6, 2023),
+       (75, 3, 4, 'seojoon', 3, 2, 7, 5, 2023),
+       (63, 2, 6, 'choihj', 5, 1, 4, 4, 2023),
+       (83, 6, 5, 'dhdh1557', 5, 7, 12, 7, 2023);
 
 --TRUNCATE TABLE user_team_relation;
 INSERT INTO user_team_relation (user_id, team_id, relation_status, created_date, modified_date)
