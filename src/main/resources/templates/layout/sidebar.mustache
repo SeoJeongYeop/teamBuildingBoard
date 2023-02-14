@@ -10,7 +10,7 @@
         {{/userPicture}}
         {{^userPicture}}
         <div id="sidebar-user-info">
-            <img width="42px" height="42px" src="/images/default-profile.png" class="profile-img" alt="default-profile-image">
+            <img width="42px" height="42px" src="https://loremflickr.com/100/100" class="profile-img" alt="default-profile-image">
             <a href="/oauth2/authorization/google">
                 <span id="profile-username">Google LogIn</span>
             </a>
@@ -18,19 +18,6 @@
         {{/userPicture}}
     </div>
     <div id="community-tab" class="w-100">
-        {{#userName}}
-        {{!내 활동}}
-        <div class="boardgroup-title">
-            <span>내 활동</span>
-            <i class="bi bi-chevron-up folder hover-opacity" data-fold-target=".link-activity"></i>
-        </div>
-        <div class="boardgroup-item link-activity hover-opacity">
-            <a href="/profile/{{userId}}/activity" class="sidebar-link">
-                <i class="bi bi-file-text-fill fa-lg"></i>
-                <span>내 활동 목록</span>
-            </a>
-        </div>
-        {{/userName}}
         {{!일반 게시판}}
         <div id="normal-boardgroup" class="boardgroup-title">
             <a href="/community/">

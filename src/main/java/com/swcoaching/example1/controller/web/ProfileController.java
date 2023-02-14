@@ -47,8 +47,6 @@ public class ProfileController {
             model.addAttribute("teamRelationsCount", (userTeamResDto != null) ? userTeamResDto.size() : 0);
             model.addAttribute("teamRelations", userTeamResDto);
             model.addAttribute("profile", dto);
-
-            model.addAttribute("board", boardService.findById(id));
             if (user != null) {
                 model.addAttribute("userName", user.getName());
                 model.addAttribute("userPicture", user.getPicture());

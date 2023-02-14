@@ -28,18 +28,12 @@
                         <td>
                             <a href="/teams/{{id}}">
                                 {{#image}}
-                                    <img width="20px" height="20px" src="data:image/jpg;base64,{{image}}" alt="팀 이미지" class="rounded-1">
+                                    <img width="20px" height="20px" src="data:image/jpg;base64,{{image}}" alt="팀 이미지"
+                                         class="rounded-1">
                                 {{/image}}
                                 {{^image}}
-                                    {{#picture}}
-                                        <img width="20px" height="20px" src="{{picture}}" alt="팀 이미지" class="rounded-1">
-                                    {{/picture}}
-                                    {{^picture}}
-                                    <img width="20px" height="20px" src="/images/default-team.png" alt="팀 이미지"
-                                         class="rounded-1">
-                                    {{/picture}}
+                                    <i class="bi bi-building-fill"></i>
                                 {{/image}}
-
                                 <span>{{name}}</span>
                             </a>
                         </td>
