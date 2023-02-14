@@ -6,6 +6,7 @@ import com.swcoaching.example1.domain.user.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 public class PostsResponseDto {
@@ -16,8 +17,8 @@ public class PostsResponseDto {
     private final String author;
     private final BoardEntity board;
     private final User user;
-    private final LocalDateTime createdDate;
-    private final LocalDateTime modifiedDate;
+    private final String createdDate;
+    private final String modifiedDate;
     private boolean isAuthor;
 
 
@@ -28,13 +29,18 @@ public class PostsResponseDto {
         this.author = entity.getAuthor();
         this.board = entity.getBoard();
         this.user = entity.getUser();
-        this.createdDate = entity.getCreatedDate();
-        this.modifiedDate = entity.getModifiedDate();
+        this.createdDate = applyDateTimePattern(entity.getCreatedDate());
+        this.modifiedDate = applyDateTimePattern(entity.getModifiedDate());
         this.isAuthor = false;
     }
 
     public boolean isAuthor() {
         return this.isAuthor;
+    }
+
+    private String applyDateTimePattern(LocalDateTime t) {
+        if (t != null) return t.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return null;
     }
 
     public void checkAuthor(Long userId) {

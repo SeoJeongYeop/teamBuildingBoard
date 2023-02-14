@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @RequiredArgsConstructor
@@ -16,15 +17,20 @@ public class UserTeamResponseDto {
     private final User user;
     private final Team team;
     private final RelationStatus relationStatus;
-    private final LocalDateTime createdDate;
-    private final LocalDateTime modifiedDate;
+    private final String createdDate;
+    private final String modifiedDate;
 
     public UserTeamResponseDto(UserTeamRelation entity) {
         this.id = entity.getId();
         this.user = entity.getUser();
         this.team = entity.getTeam();
         this.relationStatus = entity.getRelationStatus();
-        this.createdDate = entity.getCreatedDate();
-        this.modifiedDate = entity.getModifiedDate();
+        this.createdDate = applyDateTimePattern(entity.getCreatedDate());
+        this.modifiedDate = applyDateTimePattern(entity.getModifiedDate());
+    }
+
+    private String applyDateTimePattern(LocalDateTime t) {
+        if (t != null) return t.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return null;
     }
 }

@@ -4,14 +4,12 @@ import com.swcoaching.example1.domain.team.Team;
 import com.swcoaching.example1.domain.user.User;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 @Getter
 public class TeamReqListResDto {
     private final Long id;
     private final String content;
-    private final LocalDateTime createdDate;
-    private final LocalDateTime modifiedDate;
+    private final String createdDate;
+    private final String modifiedDate;
     private final Team team;
     private final User user;
     private final Long relationId;

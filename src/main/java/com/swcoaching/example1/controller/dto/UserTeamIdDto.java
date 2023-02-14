@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class UserTeamIdDto {
-    private long id;
+    private Long id;
 
-    public UserTeamIdDto(long id) {
+    public UserTeamIdDto(Long id) {
         this.id = id;
     }
 }

@@ -11,7 +11,7 @@ const main = {
             _this.delete();
         });
         $('#btn-team-save').on('click', () => {
-            _this.saveTeamImage();
+            _this.saveTeam();
         });
         $('#btn-team-update').on('click', () => {
             _this.updateTeamImage();
@@ -19,7 +19,6 @@ const main = {
         $('#btn-team-apply').on('click', () => {
             _this.applyTeam();
         });
-
         $('.btn-team-approve').on('click', (e) => {
             _this.approveTeam(e);
         });
@@ -102,31 +101,32 @@ const main = {
         }).done(function (data) {
             console.log("data", data);
             alert('팀이 생성되었습니다.');
-            window.location.href = '/teams';
+            main.saveTeamImage(data);
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
     },
-    saveTeamImage: function () {
+    saveTeamImage: function (teamId) {
         let inputPicture = $('#picture')[0];
         if (inputPicture.files.length > 0) {
             let formData = new FormData();
             formData.append('uploadImage', inputPicture.files[0]);
             $.ajax({
                 type: 'POST',
-                url: '/api/v1/images',
+                url: '/api/v1/team-images/' + teamId,
                 processData: false,
                 contentType: false,
                 data: formData
-            }).done(function (data) {
-                main.saveTeam(data);
+            }).done(function () {
+                alert('사진을 저장했습니다.');
+                window.location.href = '/teams';
             }).fail(function (error) {
                 console.log(error);
                 alert("사진 저장에 실패했습니다.");
-                main.saveTeam(null);
+                window.location.href = '/teams';
             });
-        } else {
-            main.saveTeam(null);
+        }else{
+            window.location.href = '/teams';
         }
     },
     updateTeam: function (img) {
@@ -220,7 +220,26 @@ const main = {
         });
     },
     denyTeam: function (e) {
-        console.log(e.target['data-id']);
+        let targetId = e.target.dataset.id;
+        console.log(targetId);
+        let data = {
+            id: targetId,
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/user-team-relations/deny',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function (data) {
+            alert('거절했습니다.');
+            $(`.btn-primary[data-id="${data.id}"]`).remove();
+            let denyBtn = $(`.btn-danger[data-id="${data.id}"]`);
+            denyBtn.attr('disabled', true);
+            denyBtn.attr('class', 'btn btn-outline-danger');
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     },
 };
 

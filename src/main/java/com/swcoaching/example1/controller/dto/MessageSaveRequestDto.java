@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MessageSaveRequestDto {
     private String content;
-    private long userId;
+    private Long userId;
 
     @Builder
-    public MessageSaveRequestDto(String content, long userId) {
+    public MessageSaveRequestDto(String content, Long userId) {
         this.content = content;
         this.userId = userId;
     }

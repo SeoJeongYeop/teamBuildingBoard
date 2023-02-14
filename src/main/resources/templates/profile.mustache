@@ -3,18 +3,18 @@
     {{>layout/sidebar}}
     <div class="col-md-9">
         <section class="mx-auto mt-5">
-            <div class="d-flex justify-content-center">
-                <span class="endpoint left"></span>
-                <span class="line-connect"></span>
-                <span class="endpoint right"></span>
-            </div>
             <div id="id-card">
                 <div id="profile-id-card">
                     <p class="text-weak text-start ms-3 my-2">ID CARD</p>
                     <div class="d-flex justify-content-center">
                         <div class="id-card-content d-flex justify-content-center">
                             <div class="id-card-img">
-                                <img src="{{profile.picture}}" alt="profile img">
+                                {{#profile.image}}
+                                    <img src="data:image/jpg;base64,{{profile.image}}" alt="profile img">
+                                {{/profile.image}}
+                                {{^profile.image}}
+                                    <img src="{{profile.picture}}" alt="profile img">
+                                {{/profile.image}}
                             </div>
                         </div>
                         <div class="id-card-content d-flex flex-column justify-content-between">
@@ -65,19 +65,23 @@
                             {{/githubData}}
                         </div>
                     </div>
-                    <p class="text-weak me-3 my-2 text-end">{{#githubData}}{{end_year}}{{/githubData}} &#9426; SKKU-OSP</p>
+                    <p class="text-weak me-3 my-2 text-end">
+                        {{#githubData}}{{end_year}}{{/githubData}} &#9426;
+                    </p>
                 </div>
             </div>
             <div class="d-flex justify-content-end gap-2">
                 <button id="btn-save-id-card" class="btn-id-card pb-active">ID CARD 다운로드</button>
             </div>
         </section>
-        <div>
+        <div id="activity-card">
             <div class="card h-100">
                 <div id="activity" class="card-body">
                     <div class="card-title d-flex justify-content-between">
                         커뮤니티 활동
-                        <a href="/profile/{{profile.id}}/activity" target="_blank"><i id="icon-contr" class="bi-box-arrow-up-right evt-icon" title="이동"></i></a>
+                        <a href="/profile/{{profile.id}}/activity" target="_blank">
+                            <i id="icon-contr" class="bi-box-arrow-up-right evt-icon" title="이동"></i>
+                        </a>
                     </div>
 
                     {{!최근 접속일}}
@@ -96,26 +100,26 @@
 
                     {{!쓴 게시글}}
                     {{#postsCount}}
-                    <div class="card w-100 mb-2">
-                        <div class="card-body">
-                            <span class="card-title">내가 쓴 게시글</span>
-                            <div>
-                                {{postsCount}}
+                        <div class="card w-100 mb-2">
+                            <div class="card-body">
+                                <span class="card-title">내가 쓴 게시글</span>
+                                <div>
+                                    {{postsCount}}
+                                </div>
                             </div>
                         </div>
-                    </div>
                     {{/postsCount}}
 
                     {{!만든 팀}}
                     {{#teamsCount}}
-                    <div class="card w-100 mb-2">
-                        <div class="card-body">
-                            <span class="card-title">내가 만든 팀</span>
-                            <div>
-                                {{teamsCount}}
+                        <div class="card w-100 mb-2">
+                            <div class="card-body">
+                                <span class="card-title">내가 만든 팀</span>
+                                <div>
+                                    {{teamsCount}}
+                                </div>
                             </div>
                         </div>
-                    </div>
                     {{/teamsCount}}
 
                     {{!소속 팀}}
@@ -134,5 +138,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 {{>layout/footer}}

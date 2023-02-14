@@ -30,6 +30,10 @@ public class User extends BaseTimeEntity {
     @Column
     private String picture;
 
+    @Lob
+    @Column(length = 100000)
+    private String image;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
@@ -53,7 +57,11 @@ public class User extends BaseTimeEntity {
         return this;
     }
 
-    public void setRoleUser(){
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setRoleUser() {
         this.role = Role.USER;
     }
 
