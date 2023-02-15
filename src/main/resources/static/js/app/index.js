@@ -73,12 +73,13 @@ const main = {
         });
     },
     delete: function () {
-        let id = $('#id').val();
+        let id = $('#article-metadata').data('id');
 
         $.ajax({
             type: 'DELETE',
             url: '/api/v1/posts/' + id,
             dataType: 'json',
+            data:JSON.stringify({}),
             contentType: 'application/json; charset=utf-8'
         }).done(function () {
             alert('글이 삭제되었습니다.');
