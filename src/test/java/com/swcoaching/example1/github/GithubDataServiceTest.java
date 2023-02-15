@@ -1,5 +1,6 @@
 package com.swcoaching.example1.github;
 
+import com.swcoaching.example1.controller.dto.GithubResponseDto;
 import com.swcoaching.example1.domain.github.GithubData;
 import com.swcoaching.example1.domain.github.GithubDataRepository;
 import com.swcoaching.example1.service.github.GithubDataService;
@@ -23,16 +24,16 @@ class GithubDataServiceTest {
         GithubData githubDataEntity = mock(GithubData.class);
         GithubDataRepository githubDataRepository = mock(GithubDataRepository.class);
 
-        long testGithubDataId = 1L;
+        Long testGithubDataId = 1L;
         String testGithubUsername = "SeoJeongYeop";
-        int testYear = 2023;
-        int testStarCount = 1;
-        int testCommitCount = 100;
-        int testPrCount = 1;
-        int testIssueCount = 10;
-        int testFollowerCount = 1;
-        int testFollowingCount = 1;
-        int testRepoCount = 10;
+        Long testYear = 2023L;
+        Long testStarCount = 1L;
+        Long testCommitCount = 100L;
+        Long testPrCount = 1L;
+        Long testIssueCount = 10L;
+        Long testFollowerCount = 1L;
+        Long testFollowingCount = 1L;
+        Long testRepoCount = 10L;
 
         when(githubDataEntity.getId()).thenReturn(testGithubDataId);
         when(githubDataEntity.getGithubUsername()).thenReturn(testGithubUsername);
@@ -51,7 +52,7 @@ class GithubDataServiceTest {
 
         // when
         GithubDataService githubDataService = new GithubDataServiceImpl(githubDataRepository);
-        GithubData githubData = githubDataService.findByGithubUsername(testGithubUsername);
+        GithubResponseDto githubData = githubDataService.findByGithubUsername(testGithubUsername);
 
         // then
         assertEquals(githubData.getId(), testGithubDataId);
