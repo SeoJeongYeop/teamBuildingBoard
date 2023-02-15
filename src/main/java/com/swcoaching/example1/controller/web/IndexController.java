@@ -40,6 +40,7 @@ public class IndexController {
 
         model.addAttribute("Title", "메인 페이지");
         model.addAttribute("TitleLink", "/");
+        model.addAttribute("defaultImage", defaultImage.DEFAULT_PROFILE);
 
         return "index";
     }
@@ -61,6 +62,8 @@ public class IndexController {
         model.addAttribute("Title", dto.getTitle());
         model.addAttribute("TitleLink", "/community/boards/" + dto.getId());
         model.addAttribute("saveLink", "/community/posts/save" + "?id=" + boardId);
+        model.addAttribute("defaultImage", defaultImage.DEFAULT_PROFILE);
+
         return "index";
     }
 

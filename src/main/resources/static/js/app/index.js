@@ -25,6 +25,9 @@ const main = {
         $('.btn-team-deny').on('click', (e) => {
             _this.denyTeam(e);
         });
+        $('#btn-github-save').on('click', () => {
+            _this.connectGithub();
+        })
     },
     save: function () {
         let data = {
@@ -70,12 +73,13 @@ const main = {
         });
     },
     delete: function () {
-        let id = $('#id').val();
+        let id = $('#article-metadata').data('id');
 
         $.ajax({
             type: 'DELETE',
             url: '/api/v1/posts/' + id,
             dataType: 'json',
+            data:JSON.stringify({}),
             contentType: 'application/json; charset=utf-8'
         }).done(function () {
             alert('글이 삭제되었습니다.');
@@ -241,6 +245,29 @@ const main = {
             alert(JSON.stringify(error));
         });
     },
+    connectGithub: function () {
+        console.log("connectGithub");
+        let targetUser = $('#id').val();
+        let targetGithub = $('#github-username').val();
+
+        let data = {
+            userId: targetUser,
+            githubUsername: targetGithub
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/profile-github/save',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function (data) {
+            alert('연결되었습니다.');
+            window.location.href = '/profile/'+data;
+        }).fail(function (error) {
+            alert('연결에 실패했습니다.');
+            console.log(JSON.stringify(error));
+        });
+    }
 };
 
 main.init();
@@ -256,9 +283,6 @@ $().ready(function () {
     });
     // 현재 주소를 체크해서 사이드바의 아이템의 폰트 색을 변경
     $('.sidebar-link').each(function () {
-        console.log("$(this).attr('href')", $(this).attr('href'));
-        console.log("window.location.pathname", window.location.pathname);
-
         if ($(this).attr('href') === window.location.pathname) {
             $(this).parent().addClass('selected');
         }
