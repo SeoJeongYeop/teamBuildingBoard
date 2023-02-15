@@ -100,8 +100,8 @@ public class IndexController {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
         model.addAttribute("boards", boardService.findAll());
-        if (id != null)
-            model.addAttribute("board", boardService.findById(id));
+        if (dto != null)
+            model.addAttribute("board", boardService.findById(dto.getBoard().getId()));
 
         return "posts-update";
     }
